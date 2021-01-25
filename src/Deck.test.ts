@@ -17,7 +17,7 @@ describe('Deck', () => {
 		expect(deck.cards()).toHaveLength(33);
 	});
 
-	test('Default deck should contain 4 cards of every specified ranks', () => {
+	test('Deck should contain 4 cards of every specified rank, if customCount is not specified', () => {
 		const deck = new Deck({ ranks: [six] });
 		expect(deck.cards().filter((card) => card.rank === six)).toHaveLength(4);
 	});
