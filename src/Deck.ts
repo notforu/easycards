@@ -2,17 +2,25 @@ import { ICard } from './Card';
 
 export interface IDeck {
 	cards(): ICard[];
-	pick(): ICard;
+	pick(): ICard | null;
 }
 
-const DEFAULT_CARDS_PER_RANK = 4;
+export const DEFAULT_CARDS_PER_RANK = 4;
+export const DEFAULT_RANKS = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+
+export interface DeckOptions {
+	ranks: string[];
+	customCounts?: Record<string, number>;
+}
 
 export class Deck implements IDeck {
 	private _cards: ICard[] = [];
 
-	constructor(ranks: string[]) {
+	constructor(settings: DeckOptions) {
+		const { ranks, customCounts } = settings;
 		for (const rank of ranks) {
-			for (let i = 0; i < DEFAULT_CARDS_PER_RANK; i++) {
+			const count = customCounts?.[rank] || DEFAULT_CARDS_PER_RANK;
+			for (let i = 0; i < count; i++) {
 				this._cards.push({
 					rank,
 				});
@@ -24,7 +32,7 @@ export class Deck implements IDeck {
 		return this._cards;
 	}
 
-	pick(): ICard {
-		return this._cards.pop();
+	pick(): ICard | null {
+		return this._cards.pop() || null;
 	}
 }
