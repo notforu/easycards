@@ -1,0 +1,19 @@
+{
+  "name": "foolgame",
+  "version": "1.0.0",
+  "description": "Card game \"Fool\" with possibility to create a custom deck",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage --config=jest.config.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notforu/foolgame.git"
+  },
+  "author": "Sasha Muratov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/notforu/foolgame/issues"
+  },
+  "homepage": "https://github.com/notforu/foolgame#readme"
+}
