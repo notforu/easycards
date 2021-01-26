@@ -1,36 +1,42 @@
-import { Deck, DEFAULT_RANKS } from './Deck';
+import { Deck, DEFAULT_RANKS, IDeck } from './Deck';
 
 const six = '6';
+const seven = '7';
+let deck: IDeck;
 
 describe('Deck', () => {
+	beforeEach(() => {
+		deck = new Deck({ ranks: DEFAULT_RANKS });
+	});
+
 	test('Default deck size should be 36', () => {
-		const deck = new Deck({ ranks: DEFAULT_RANKS });
 		expect(deck.cards().length).toBe(36);
 	});
 
 	test('After picking a card, deck size should be decreased', () => {
-		const deck = new Deck({ ranks: DEFAULT_RANKS });
 		deck.pick();
 		expect(deck.cards()).toHaveLength(35);
-		deck.pick();
-		deck.pick();
-		expect(deck.cards()).toHaveLength(33);
 	});
 
-	test('Deck should contain 4 cards of every specified rank, if customCount is not specified', () => {
-		const deck = new Deck({ ranks: [six] });
-		expect(deck.cards().filter((card) => card.rank === six)).toHaveLength(4);
+	test('Should pick last card', () => {
+		const cards = deck.cards();
+		const lastCard = cards[cards.length - 1];
+		expect(deck.pick()).toEqual(lastCard);
+	});
+
+	test('Deck should contain 4 cards of every specified rank, if customCounts is not specified', () => {
+		const customDeck = new Deck({ ranks: [six, seven] });
+		expect(customDeck.cards().filter((card) => card.rank === six)).toHaveLength(4);
+		expect(customDeck.cards().filter((card) => card.rank === seven)).toHaveLength(4);
 	});
 
 	test('Should have custom amount of cards per rank, if customCount for this rank is specified', () => {
-		const deck = new Deck({
-			ranks: [six],
+		const customDeck = new Deck({
+			ranks: DEFAULT_RANKS,
 			customCounts: {
 				[six]: 1,
 			},
 		});
-		const card = deck.pick();
-		expect(card?.rank).toEqual(six);
-		expect(deck.cards()).toHaveLength(0);
+		expect(customDeck.cards().filter((card) => card.rank === six)).toHaveLength(1);
 	});
 });

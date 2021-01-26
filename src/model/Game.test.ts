@@ -28,11 +28,6 @@ describe('Game', () => {
 		expect(john.getCards()).toHaveLength(DEFAULT_CARDS_PER_HAND);
 	});
 
-	test('Turn should decrease hand size', () => {
-		john.turn([0]);
-		expect(john.getCards()).toHaveLength(DEFAULT_CARDS_PER_HAND - 1);
-	});
-
 	/*
 	TODO: separate it
 	test('Should be exact card on board after turn', () => {
