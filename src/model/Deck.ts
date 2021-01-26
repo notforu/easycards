@@ -1,7 +1,7 @@
 import { ICard } from './Card';
 
 export interface IDeck {
-	cards(): ICard[];
+	getCards(): ICard[];
 	pick(): ICard | null;
 }
 
@@ -28,7 +28,7 @@ export class Deck implements IDeck {
 		}
 	}
 
-	cards(): ICard[] {
+	getCards(): ICard[] {
 		return this._cards;
 	}
 
