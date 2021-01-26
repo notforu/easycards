@@ -1,19 +1,15 @@
 import { ICard } from './Card';
 import { IDeck } from './Deck';
+import { createCounter } from './utils/createCounter';
 
 export interface IPlayer {
 	getCards(): ICard[];
 	pickCards(deck: IDeck, amount: number): ICard[];
+	turn(cardIndexes: number[]): ICard[];
+	fillHand(deck: IDeck): void;
 }
 
 export const DEFAULT_CARDS_PER_HAND = 6;
-
-function createCounter(): () => number {
-	let id = 0;
-	return function next(): number {
-		return ++id;
-	}
-}
 
 const getId = createCounter();
 
@@ -29,6 +25,15 @@ export class Player implements IPlayer {
 		return this.id;
 	}
 
+	turn(cardIndexes: number[]): ICard[] {
+		const cards = [];
+		for (const cardIndex of cardIndexes) {
+			cards.push(this.cards[cardIndex]);
+			this.cards.splice(cardIndex, 1);
+		}
+		return cards;
+	}
+
 	pickCards(deck: IDeck, amount: number): ICard[] {
 		for (let i = 0; i < amount; i++) {
 			const card = deck.pick();
@@ -37,5 +42,12 @@ export class Player implements IPlayer {
 			}
 		}
 		return this.cards;
+	}
+
+	fillHand(deck: IDeck): void {
+		const neededAmount = DEFAULT_CARDS_PER_HAND - this.cards.length;
+		if (neededAmount > 0) {
+			this.pickCards(deck, neededAmount);
+		}
 	}
 }

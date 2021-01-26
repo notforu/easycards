@@ -1,8 +1,12 @@
 import { IPlayer } from './Player';
 import { IDeck } from './Deck';
+import { ICard } from './Card';
+import { Board, IBoard } from './Board';
 
 export interface IGame {
 	start(): void;
+	getCurrentPlayer(): IPlayer;
+	getBoard(): IBoard;
 }
 
 export interface GameOptions {
@@ -21,9 +25,16 @@ export class Game implements IGame {
 	}
 
 	start(): void {
+		for (let player of this.players) {
+			player.fillHand(this.deck);
+		}
 	}
 
-	currentPlayer(): IPlayer {
+	getCurrentPlayer(): IPlayer {
 		return this.players[0];
+	}
+
+	getBoard(): IBoard {
+		return new Board();
 	}
 }
