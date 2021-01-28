@@ -6,7 +6,7 @@ export interface IGame {
 	start(): void;
 	getCurrentPlayer(): IPlayer;
 	getBoard(): IBoard;
-	makeTurn(player: IPlayer, cardIndexes: number[]): void;
+	startRound(player: IPlayer, cardIndexes: number[]): void;
 }
 
 export interface GameOptions {
@@ -46,7 +46,7 @@ export class Game implements IGame {
 		return this.board;
 	}
 
-	makeTurn(player: IPlayer, cardIndexes: number[]): void {
+	startRound(player: IPlayer, cardIndexes: number[]): void {
 		this.board.put(player.withdraw(cardIndexes));
 		this.currentPlayer = this.getNextPlayer();
 	}

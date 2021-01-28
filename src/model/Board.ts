@@ -2,6 +2,7 @@ import { ICard } from './Card';
 
 export interface IBoard {
 	put(cards: ICard[]): void;
+	getUnbeatenCards(): ICard[];
 	getCards(): Map<ICard, ICard | null>; // null if unbeaten
 }
 
@@ -19,5 +20,15 @@ export class Board implements IBoard {
 
 	getCards(): Map<ICard, ICard | null> {
 		return this.cards;
+	}
+
+	getUnbeatenCards(): ICard[] {
+		const result: ICard[] = [];
+		for (const card of this.cards.keys()) {
+			if (this.cards.get(card) === null) {
+				result.push(card);
+			}
+		}
+		return result;
 	}
 }

@@ -32,8 +32,15 @@ describe('Game', () => {
 		expect(john.getCards()).toHaveLength(DEFAULT_CARDS_PER_HAND);
 	});
 
-	test('Should be exact card on board after turn', () => {
-		game.makeTurn(john, [0]);
+	test('Should pass the turn', () => {
+		game.startRound(john, [0]);
 		expect(game.getCurrentPlayer()).toStrictEqual(sam);
 	});
+
+	/*test('Opponent should beat the card', () => {
+		game.startRound(john, [0]);
+		const cards = game.getBoard().getUnbeatenCards();
+		game.beat(sam, cards[0]);
+		expect(game.getCurrentPlayer()).toStrictEqual(sam);
+	});*/
 });

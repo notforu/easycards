@@ -12,11 +12,17 @@ describe('Board', () => {
 		expect(board.getCards().size).toEqual(0);
 	});
 
-	test('Should be exact card on board after turn', () => {
+	test('Should have exact cards player\'s after turn', () => {
 		const ace = new Card({ rank: 'A' });
 		const six = new Card({ rank: '6' });
 		board.put([ace, six]);
 		expect(board.getCards().get(ace)).toBeNull();
 		expect(board.getCards().get(six)).toBeNull();
 	});
+
+	test('Should return unbeaten card', () => {
+		const six = new Card({ rank: '6' });
+		board.put([six]);
+		expect(board.getUnbeatenCards()).toEqual([six]);
+	})
 });
