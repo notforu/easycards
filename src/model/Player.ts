@@ -5,7 +5,7 @@ import { createCounter } from './utils/createCounter';
 export interface IPlayer {
 	getCards(): ICard[];
 	pickCards(deck: IDeck, amount: number): ICard[];
-	turn(cardIndexes: number[]): ICard[];
+	withdraw(cardIndexes: number[]): ICard[];
 	fillHand(deck: IDeck): void;
 }
 
@@ -25,7 +25,7 @@ export class Player implements IPlayer {
 		return this.id;
 	}
 
-	turn(cardIndexes: number[]): ICard[] {
+	withdraw(cardIndexes: number[]): ICard[] {
 		const cards = [];
 		for (const cardIndex of cardIndexes) {
 			cards.push(this.cards[cardIndex]);

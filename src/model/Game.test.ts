@@ -1,20 +1,24 @@
 import { Game, IGame } from './Game';
 import { Deck, DEFAULT_RANKS, IDeck } from './Deck';
 import { DEFAULT_CARDS_PER_HAND, IPlayer, Player } from './Player';
+import { Board, IBoard } from './Board';
 
 let sam: IPlayer;
 let john: IPlayer;
 let deck: IDeck;
 let game: IGame;
+let board: IBoard;
 
 describe('Game', () => {
 	beforeEach(() => {
 		sam = new Player();
 		john = new Player();
 		deck = new Deck({ ranks: DEFAULT_RANKS });
+		board = new Board();
 		game = new Game({
 			deck,
 			players: [john, sam],
+			board,
 		});
 		game.start();
 	});
@@ -28,13 +32,8 @@ describe('Game', () => {
 		expect(john.getCards()).toHaveLength(DEFAULT_CARDS_PER_HAND);
 	});
 
-	/*
-	TODO: separate it
 	test('Should be exact card on board after turn', () => {
-		const board = game.getBoard();
-		const cards = john.turn([0]);
-		board.put(cards);
-		expect(board.getCards().has(cards[0]));
+		game.makeTurn(john, [0]);
+		expect(game.getCurrentPlayer()).toStrictEqual(sam);
 	});
-	*/
 });

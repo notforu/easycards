@@ -1,4 +1,4 @@
-import { ICard } from './Card';
+import { Card, ICard } from './Card';
 
 export interface IDeck {
 	getCards(): ICard[];
@@ -21,9 +21,7 @@ export class Deck implements IDeck {
 		for (const rank of ranks) {
 			const count = customCounts?.[rank] || DEFAULT_CARDS_PER_RANK;
 			for (let i = 0; i < count; i++) {
-				this._cards.push({
-					rank,
-				});
+				this._cards.push(new Card({ rank }));
 			}
 		}
 	}

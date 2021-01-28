@@ -6,11 +6,18 @@ export interface IBoard {
 }
 
 export class Board implements IBoard {
-	constructor() {}
+	private readonly cards: Map<ICard, ICard | null>;
+	constructor() {
+		this.cards = new Map<ICard, ICard | null>();
+	}
 
-	put(cards: ICard[]): void {}
+	put(cards: ICard[]): void {
+		for (const card of cards) {
+			this.cards.set(card, null);
+		}
+	}
 
-	getCards(): Map<ICard, ICard> {
-		return new Map<ICard, ICard>();
+	getCards(): Map<ICard, ICard | null> {
+		return this.cards;
 	}
 }

@@ -26,8 +26,8 @@ describe('Deck', () => {
 
 	test('Deck should contain 4 cards of every specified rank, if customCounts is not specified', () => {
 		const customDeck = new Deck({ ranks: [six, seven] });
-		expect(customDeck.getCards().filter((card) => card.rank === six)).toHaveLength(4);
-		expect(customDeck.getCards().filter((card) => card.rank === seven)).toHaveLength(4);
+		expect(customDeck.getCards().filter((card) => card.getRank() === six)).toHaveLength(4);
+		expect(customDeck.getCards().filter((card) => card.getRank() === seven)).toHaveLength(4);
 	});
 
 	test('Should have custom amount of cards per rank, if customCount for this rank is specified', () => {
@@ -37,6 +37,6 @@ describe('Deck', () => {
 				[six]: 1,
 			},
 		});
-		expect(customDeck.getCards().filter((card) => card.rank === six)).toHaveLength(1);
+		expect(customDeck.getCards().filter((card) => card.getRank() === six)).toHaveLength(1);
 	});
 });

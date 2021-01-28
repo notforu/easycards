@@ -1,27 +1,35 @@
 import { IPlayer } from './Player';
 import { IDeck } from './Deck';
-import { ICard } from './Card';
-import { Board, IBoard } from './Board';
+import { IBoard } from './Board';
 
 export interface IGame {
 	start(): void;
 	getCurrentPlayer(): IPlayer;
 	getBoard(): IBoard;
+	makeTurn(player: IPlayer, cardIndexes: number[]): void;
 }
 
 export interface GameOptions {
 	players: IPlayer[];
 	deck: IDeck;
+	board: IBoard;
 }
 
 export class Game implements IGame {
-	private players: IPlayer[];
-	private deck: IDeck;
+	private readonly players: IPlayer[];
+	private readonly deck: IDeck;
+	private readonly board: IBoard;
+	private currentPlayer: IPlayer;
 
 	constructor(options: GameOptions) {
-		const { players, deck } = options;
+		const { players, deck, board } = options;
+		if (players.length < 2) {
+			throw new Error('Must be at least 2 players');
+		}
 		this.players = players;
 		this.deck = deck;
+		this.board = board;
+		this.currentPlayer = players[0];
 	}
 
 	start(): void {
@@ -31,10 +39,23 @@ export class Game implements IGame {
 	}
 
 	getCurrentPlayer(): IPlayer {
-		return this.players[0];
+		return this.currentPlayer;
 	}
 
 	getBoard(): IBoard {
-		return new Board();
+		return this.board;
+	}
+
+	makeTurn(player: IPlayer, cardIndexes: number[]): void {
+		this.board.put(player.withdraw(cardIndexes));
+		this.currentPlayer = this.getNextPlayer();
+	}
+
+	private getNextPlayer(): IPlayer {
+		const index = this.players.indexOf(this.currentPlayer);
+		if (index === this.players.length - 1) {
+			return this.players[0];
+		}
+		return this.players[index + 1];
 	}
 }
