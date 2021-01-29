@@ -6,7 +6,7 @@ export interface IGame {
 	start(): void;
 	getCurrentPlayer(): IPlayer;
 	getBoard(): IBoard;
-	startRound(player: IPlayer, cardIndexes: number[]): void;
+	startRound(player: IPlayer, cardIds: string[]): void;
 }
 
 export interface GameOptions {
@@ -46,8 +46,8 @@ export class Game implements IGame {
 		return this.board;
 	}
 
-	startRound(player: IPlayer, cardIndexes: number[]): void {
-		this.board.put(player.withdraw(cardIndexes));
+	startRound(player: IPlayer, cardIds: string[]): void {
+		this.board.put(player.withdraw(cardIds));
 		this.currentPlayer = this.getNextPlayer();
 	}
 

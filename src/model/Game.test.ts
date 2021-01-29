@@ -33,7 +33,7 @@ describe('Game', () => {
 	});
 
 	test('Should pass the turn', () => {
-		game.startRound(john, [0]);
+		game.startRound(john, [john.getCards()[0].getId()]);
 		expect(game.getCurrentPlayer()).toStrictEqual(sam);
 	});
 

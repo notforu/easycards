@@ -1,36 +1,37 @@
 import { ICard } from './Card';
 import { IDeck } from './Deck';
 import { createCounter } from './utils/createCounter';
+import { Identifiable } from './utils/Identifiable';
 
-export interface IPlayer {
+export interface IPlayer extends Identifiable {
 	getCards(): ICard[];
 	pickCards(deck: IDeck, amount: number): ICard[];
-	withdraw(cardIndexes: number[]): ICard[];
+	withdraw(cardIds: string[]): ICard[];
 	fillHand(deck: IDeck): void;
 }
 
 export const DEFAULT_CARDS_PER_HAND = 6;
 
-const getId = createCounter();
+const counter = createCounter();
 
 export class Player implements IPlayer {
 	private cards: ICard[] = [];
-	private id: number = getId();
+	private id: string = `Player_${String(counter())}`;
 
 	getCards(): ICard[] {
 		return this.cards;
 	}
 
-	getId(): number {
+	getId(): string {
 		return this.id;
 	}
 
-	withdraw(cardIndexes: number[]): ICard[] {
-		const cards = [];
-		for (const cardIndex of cardIndexes) {
-			cards.push(this.cards[cardIndex]);
-			this.cards.splice(cardIndex, 1);
+	withdraw(cardIds: string[]): ICard[] {
+		const cards: ICard[] = this.cards.filter(card => cardIds.includes(card.getId()));
+		if (cardIds.length !== cards.length) {
+			throw new Error('Only cards ids from player\'s hand must be in cardIds');
 		}
+		this.cards = this.cards.filter(card => !cardIds.includes(card.getId()));
 		return cards;
 	}
 

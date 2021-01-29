@@ -27,14 +27,14 @@ describe('Player', () => {
 
 	test('Turn should decrease hand size', () => {
 		player.fillHand(deck);
-		player.withdraw([0]);
+		player.withdraw([player.getCards()[0].getId()]);
 		expect(player.getCards()).toHaveLength(DEFAULT_CARDS_PER_HAND - 1);
 	});
 
 	test('Should turn with exact cards', () => {
 		player.fillHand(deck);
 		const cards = player.getCards();
-		const turn = player.withdraw([0,5]);
+		const turn = player.withdraw([cards[0].getId(), cards[5].getId()]);
 		expect(cards[0]).toEqual(turn[0]);
 		expect(cards[5]).toEqual(turn[1]);
 	});
