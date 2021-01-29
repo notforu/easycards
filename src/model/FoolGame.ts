@@ -2,11 +2,12 @@ import { IPlayer } from './Player';
 import { IDeck } from './Deck';
 import { IBoard } from './Board';
 
-export interface IGame {
+export interface IFoolGame {
 	start(): void;
 	getCurrentPlayer(): IPlayer;
 	getBoard(): IBoard;
 	startRound(player: IPlayer, cardIds: string[]): void;
+	beat(player: IPlayer, beatedCardId: string, beatenCardId: string): void;
 }
 
 export interface GameOptions {
@@ -15,7 +16,7 @@ export interface GameOptions {
 	board: IBoard;
 }
 
-export class Game implements IGame {
+export class FoolGame implements IFoolGame {
 	private readonly players: IPlayer[];
 	private readonly deck: IDeck;
 	private readonly board: IBoard;
@@ -49,6 +50,10 @@ export class Game implements IGame {
 	startRound(player: IPlayer, cardIds: string[]): void {
 		this.board.put(player.withdraw(cardIds));
 		this.currentPlayer = this.getNextPlayer();
+	}
+
+	beat(player: IPlayer, beatedCardId: string, beatenCardId: string): void {
+		return;
 	}
 
 	private getNextPlayer(): IPlayer {

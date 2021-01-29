@@ -1,4 +1,4 @@
-import { Game, IGame } from './Game';
+import { FoolGame, IFoolGame } from './FoolGame';
 import { Deck, DEFAULT_RANKS, IDeck } from './Deck';
 import { DEFAULT_CARDS_PER_HAND, IPlayer, Player } from './Player';
 import { Board, IBoard } from './Board';
@@ -6,7 +6,7 @@ import { Board, IBoard } from './Board';
 let sam: IPlayer;
 let john: IPlayer;
 let deck: IDeck;
-let game: IGame;
+let game: IFoolGame;
 let board: IBoard;
 
 describe('Game', () => {
@@ -15,7 +15,7 @@ describe('Game', () => {
 		john = new Player();
 		deck = new Deck({ ranks: DEFAULT_RANKS });
 		board = new Board();
-		game = new Game({
+		game = new FoolGame({
 			deck,
 			players: [john, sam],
 			board,
@@ -32,15 +32,15 @@ describe('Game', () => {
 		expect(john.getCards()).toHaveLength(DEFAULT_CARDS_PER_HAND);
 	});
 
-	test('Should pass the turn', () => {
+	test('Should pass the turn after starting round', () => {
 		game.startRound(john, [john.getCards()[0].getId()]);
 		expect(game.getCurrentPlayer()).toStrictEqual(sam);
 	});
 
-	/*test('Opponent should beat the card', () => {
-		game.startRound(john, [0]);
+	test('Opponent should be able to beat the card with the highest card', () => {
+		game.startRound(john, [john.getCards()[0].getId()]);
 		const cards = game.getBoard().getUnbeatenCards();
-		game.beat(sam, cards[0]);
+		game.beat(sam, cards[0].getId(), sam.getCards()[0].getId());
 		expect(game.getCurrentPlayer()).toStrictEqual(sam);
-	});*/
+	});
 });
