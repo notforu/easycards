@@ -14,23 +14,23 @@ export interface DeckOptions {
 }
 
 export class Deck implements IDeck {
-	private _cards: ICard[] = [];
+	private cards: ICard[] = [];
 
 	constructor(options: DeckOptions = { ranks: DEFAULT_RANKS }) {
 		const { ranks, customCounts } = options;
 		for (const rank of ranks) {
 			const count = customCounts?.[rank] || DEFAULT_CARDS_PER_RANK;
 			for (let i = 0; i < count; i++) {
-				this._cards.push(new Card({ rank }));
+				this.cards.push(new Card({ rank }));
 			}
 		}
 	}
 
 	getCards(): ICard[] {
-		return this._cards;
+		return this.cards;
 	}
 
 	pick(): ICard | null {
-		return this._cards.pop() || null;
+		return this.cards.pop() || null;
 	}
 }

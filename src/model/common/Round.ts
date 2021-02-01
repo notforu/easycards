@@ -1,13 +1,10 @@
 import { ICard } from '../Card';
 import { IPlayer } from '../Player';
-import { IAction } from './Action';
-import { FoolGameRoundOptions } from '../FoolGame';
 import { IDeck } from '../Deck';
 
 export interface IRound {
 	start(): void;
 	put(player: IPlayer, cards: ICard[]): void;
-	canPerform(player: IPlayer, action: IAction): boolean;
 }
 
 export interface RoundOptions {
@@ -15,24 +12,24 @@ export interface RoundOptions {
 	deck: IDeck;
 }
 
+export class NotAllowedActionError extends Error {
+	constructor(message: string = 'This action can not be performed now') {
+		super(message);
+	}
+}
+
 export abstract class Round implements IRound {
 	protected readonly players: IPlayer[];
 	protected readonly deck: IDeck;
 
-	constructor(options: FoolGameRoundOptions) {
+	constructor(options: RoundOptions) {
 		const { players, deck } = options;
 		this.players = players;
 		this.deck = deck;
 		this.start();
 	}
 
-	start(): void {
-		for (let player of this.players) {
-			player.fillHand(this.deck);
-		}
-	}
-
-	abstract canPerform(player: IPlayer, action: IAction): boolean;
+	abstract start(): void;
 
 	abstract put(player: IPlayer, cards: ICard[]): void;
 }

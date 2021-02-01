@@ -1,8 +1,6 @@
 import { IPlayer } from '../Player';
 import { IDeck } from '../Deck';
 import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
-import { ICard } from '../Card';
-import { IncorrectBeatError } from '../utils/errors';
 import { IGame } from '../common/Game';
 
 export interface GameOptions {

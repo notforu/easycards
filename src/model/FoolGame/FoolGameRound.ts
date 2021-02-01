@@ -1,9 +1,6 @@
 import { ICard } from '../Card';
-import { IRound, Round, RoundOptions } from '../common/Round';
+import { IRound, Round, RoundOptions } from '../common';
 import { IPlayer } from '../Player';
-import { DEFAULT_RANKS, IDeck } from '../Deck';
-import { IncorrectBeatError } from '../utils/errors';
-import { IAction } from '../common/Action';
 
 export interface IFoolGameRound extends IRound {
 	getUnbeatenCards(): ICard[];
@@ -27,7 +24,16 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 		this.currentPlayer = firstPlayer;
 	}
 
+	start(): void {
+		for (const player of this.players) {
+			player.fillHand(this.deck);
+		}
+	}
+
 	put(player: IPlayer, cards: ICard[]): void {
+		if (this.cards.size === 0) {
+			this.currentPlayer = this.getNextPlayer();
+		}
 		for (const card of cards) {
 			this.cards.set(card, null);
 		}
@@ -48,14 +54,7 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 	}
 
 	beat(player: IPlayer, target: ICard, card: ICard): void {
-		if (!this.canBeat(target, card)) {
-			throw new IncorrectBeatError();
-		}
 		this.cards.set(target, card);
-	}
-
-	canPerform(player: IPlayer, action: IAction): boolean {
-		return true;
 	}
 
 	getCurrentPlayer(): IPlayer {
@@ -68,9 +67,5 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 			return this.players[0];
 		}
 		return this.players[index + 1];
-	}
-
-	private canBeat(target: ICard, card: ICard): boolean {
-		return DEFAULT_RANKS.indexOf(target.getRank()) < DEFAULT_RANKS.indexOf(card.getRank());
 	}
 }

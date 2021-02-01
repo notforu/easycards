@@ -1,6 +1,6 @@
-import { IFoolGameRound } from '../FoolGame';
+import { IRound } from './Round';
 
 export interface IGame {
 	start(): void;
-	getCurrentRound(): IFoolGameRound;
+	getCurrentRound(): IRound;
 }

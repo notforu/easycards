@@ -1,7 +1,7 @@
 import { FoolGame } from './FoolGame';
 import { Deck, DEFAULT_RANKS, IDeck } from '../Deck';
-import { DEFAULT_CARDS_PER_HAND, IPlayer, Player } from '../Player';
-import { IGame } from '../common/Game';
+import { IPlayer, Player } from '../Player';
+import { IGame } from '../common';
 
 let sam: IPlayer;
 let john: IPlayer;

@@ -1,7 +1,16 @@
-import { IPlayer } from '../Player';
-import { IRound } from './Round';
+import { NotAllowedActionError } from './Round';
 
 export interface IAction {
 	run(): void;
-	canBePerformed(player: IPlayer, round: IRound): boolean;
+	canRun(): boolean;
+}
+
+export abstract class Action implements IAction {
+	run(): void {
+		if (!this.canRun()) {
+			throw new NotAllowedActionError();
+		}
+	}
+
+	abstract canRun(): boolean;
 }
