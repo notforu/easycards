@@ -16,7 +16,7 @@ export interface DeckOptions {
 export class Deck implements IDeck {
 	private _cards: ICard[] = [];
 
-	constructor(options: DeckOptions) {
+	constructor(options: DeckOptions = { ranks: DEFAULT_RANKS }) {
 		const { ranks, customCounts } = options;
 		for (const rank of ranks) {
 			const count = customCounts?.[rank] || DEFAULT_CARDS_PER_RANK;
