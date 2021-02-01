@@ -4,6 +4,7 @@ export interface IBoard {
 	put(cards: ICard[]): void;
 	getUnbeatenCards(): ICard[];
 	getCards(): Map<ICard, ICard | null>; // null if unbeaten
+	beat(target: ICard, card: ICard): void;
 }
 
 export class Board implements IBoard {
@@ -30,5 +31,9 @@ export class Board implements IBoard {
 			}
 		}
 		return result;
+	}
+
+	beat(target: ICard, card: ICard): void {
+		this.cards.set(target, card);
 	}
 }

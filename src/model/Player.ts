@@ -6,7 +6,7 @@ import { Identifiable } from './utils/Identifiable';
 export interface IPlayer extends Identifiable {
 	getCards(): ICard[];
 	pickCards(deck: IDeck, amount: number): ICard[];
-	withdraw(cardIds: string[]): ICard[];
+	withdraw(cards: ICard[]): ICard[];
 	fillHand(deck: IDeck): void;
 	takeCards(cards: ICard[]): void;
 }
@@ -27,12 +27,8 @@ export class Player implements IPlayer {
 		return this.id;
 	}
 
-	withdraw(cardIds: string[]): ICard[] {
-		const cards: ICard[] = this.cards.filter(card => cardIds.includes(card.getId()));
-		if (cardIds.length !== cards.length) {
-			throw new Error('Only cards ids from player\'s hand must be in cardIds');
-		}
-		this.cards = this.cards.filter(card => !cardIds.includes(card.getId()));
+	withdraw(cards: ICard[]): ICard[] {
+		this.cards = this.cards.filter(card => !cards.includes(card));
 		return cards;
 	}
 

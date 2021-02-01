@@ -1,13 +1,14 @@
 import { IPlayer } from './Player';
 import { IDeck } from './Deck';
 import { IBoard } from './Board';
+import { ICard } from './Card';
 
 export interface IFoolGame {
 	start(): void;
 	getCurrentPlayer(): IPlayer;
 	getBoard(): IBoard;
-	startRound(player: IPlayer, cardIds: string[]): void;
-	beat(player: IPlayer, beatedCardId: string, beatenCardId: string): void;
+	startRound(player: IPlayer, cards: ICard[]): void;
+	beat(player: IPlayer, target: ICard, card: ICard): void;
 }
 
 export interface GameOptions {
@@ -47,13 +48,13 @@ export class FoolGame implements IFoolGame {
 		return this.board;
 	}
 
-	startRound(player: IPlayer, cardIds: string[]): void {
-		this.board.put(player.withdraw(cardIds));
+	startRound(player: IPlayer, cards: ICard[]): void {
+		this.board.put(player.withdraw(cards));
 		this.currentPlayer = this.getNextPlayer();
 	}
 
-	beat(player: IPlayer, beatedCardId: string, beatenCardId: string): void {
-		return;
+	beat(player: IPlayer, target: ICard, card: ICard): void {
+		return this.board.beat(target, card);
 	}
 
 	private getNextPlayer(): IPlayer {

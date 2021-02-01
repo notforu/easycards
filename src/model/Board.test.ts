@@ -24,5 +24,13 @@ describe('Board', () => {
 		const six = new Card({ rank: '6' });
 		board.put([six]);
 		expect(board.getUnbeatenCards()).toEqual([six]);
-	})
+	});
+
+	test('Should beat unbeaten card', () => {
+		const jack = new Card({ rank: 'J' });
+		board.put([jack]);
+		const queen  = new Card({ rank: 'Q' });
+		board.beat(jack, queen);
+		expect(board.getUnbeatenCards()).toHaveLength(0);
+	});
 });
