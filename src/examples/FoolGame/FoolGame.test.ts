@@ -1,6 +1,6 @@
 import { FoolGame } from './FoolGame';
 import { FoolGameDeck, DEFAULT_RANKS } from './FoolGameDeck';
-import { IGame, IPlayer, Player } from '../core';
+import { IGame, IPlayer, Player } from '../../core';
 
 let sam: IPlayer;
 let john: IPlayer;

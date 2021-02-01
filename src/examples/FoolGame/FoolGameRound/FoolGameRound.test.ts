@@ -1,6 +1,6 @@
 import { FoolGameDeck, DEFAULT_RANKS } from '../FoolGameDeck';
 import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
-import { Card, DEFAULT_CARDS_PER_HAND, IPlayer, Player } from '../../core';
+import { Card, DEFAULT_CARDS_PER_HAND, IPlayer, Player } from '../../../core';
 
 let sam: IPlayer;
 let john: IPlayer;

@@ -1,4 +1,4 @@
-import { ICard, IPlayer, Action, IAction } from '../../../core';
+import { ICard, IPlayer, Action, IAction } from '../../../../core';
 import { IFoolGameRound } from '../../FoolGameRound';
 
 export class PutAction extends Action implements IAction {

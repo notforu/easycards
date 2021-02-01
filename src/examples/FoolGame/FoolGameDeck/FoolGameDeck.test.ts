@@ -1,5 +1,5 @@
 import { FoolGameDeck, DEFAULT_RANKS } from './FoolGameDeck';
-import { IDeck } from '../../core';
+import { IDeck } from '../../../core';
 
 const six = '6';
 const seven = '7';

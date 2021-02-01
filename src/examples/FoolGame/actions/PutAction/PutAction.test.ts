@@ -1,7 +1,7 @@
 import { FoolGameRound } from '../../index';
 import { FoolGameDeck, DEFAULT_RANKS } from '../../FoolGameDeck';
 import { IFoolGameRound } from '../../FoolGameRound';
-import { Card, IPlayer, Player } from '../../../core';
+import { Card, IPlayer, Player } from '../../../../core';
 import { PutAction } from './PutAction';
 
 let sam: IPlayer;

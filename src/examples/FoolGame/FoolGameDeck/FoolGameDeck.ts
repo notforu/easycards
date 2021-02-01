@@ -1,4 +1,4 @@
-import { Card, ICard, IDeck } from '../../core';
+import { Card, ICard, IDeck } from '../../../core';
 
 export const DEFAULT_CARDS_PER_RANK = 4;
 export const DEFAULT_RANKS = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];

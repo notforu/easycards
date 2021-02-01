@@ -1,7 +1,7 @@
 import { FoolGameRound } from '../../index';
 import { FoolGameDeck } from '../../FoolGameDeck';
 import { IFoolGameRound } from '../../FoolGameRound';
-import { Card, IPlayer, Player, NotAllowedActionError } from '../../../core';
+import { Card, IPlayer, Player, NotAllowedActionError } from '../../../../core';
 import { PutAction } from '../PutAction';
 import { BeatAction } from './BeatAction';
 

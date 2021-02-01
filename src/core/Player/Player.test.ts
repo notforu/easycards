@@ -1,5 +1,5 @@
 import { Player, IPlayer, DEFAULT_CARDS_PER_HAND } from './Player';
-import { FoolGameDeck, DEFAULT_RANKS } from '../../FoolGame/FoolGameDeck/FoolGameDeck';
+import { FoolGameDeck, DEFAULT_RANKS } from '../../examples/FoolGame/FoolGameDeck/FoolGameDeck';
 import { Card } from '../Card';
 import { IDeck } from '../index';
 
