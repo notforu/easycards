@@ -1,7 +1,6 @@
-import { Deck, DEFAULT_RANKS } from '../Deck';
-import { DEFAULT_CARDS_PER_HAND, IPlayer, Player } from '../Player';
+import { FoolGameDeck, DEFAULT_RANKS } from '../FoolGameDeck';
 import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
-import { Card } from '../Card';
+import { Card, DEFAULT_CARDS_PER_HAND, IPlayer, Player } from '../../core';
 
 let sam: IPlayer;
 let john: IPlayer;
@@ -13,7 +12,7 @@ describe('Fool game round logic', () => {
 		john = new Player();
 		round = new FoolGameRound({
 			players: [john, sam],
-			deck: new Deck({ ranks: DEFAULT_RANKS })
+			deck: new FoolGameDeck({ ranks: DEFAULT_RANKS })
 		});
 	});
 

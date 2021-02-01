@@ -1,7 +1,5 @@
-import { IPlayer } from '../Player';
-import { IDeck } from '../Deck';
 import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
-import { IGame } from '../common/Game';
+import { IGame, IDeck, IPlayer } from '../core';
 
 export interface GameOptions {
 	players: IPlayer[];

@@ -1,9 +1,7 @@
-import { ICard } from './Card';
-import { IDeck } from './Deck';
-import { createCounter } from './utils/createCounter';
-import { Identifiable } from './utils/Identifiable';
+import { ICard } from '../Card';
+import { IDeck } from '../Deck';
 
-export interface IPlayer extends Identifiable {
+export interface IPlayer {
 	getCards(): ICard[];
 	pickCards(deck: IDeck, amount: number): ICard[];
 	withdraw(cards: ICard[]): ICard[];
@@ -11,20 +9,16 @@ export interface IPlayer extends Identifiable {
 	takeCards(cards: ICard[]): void;
 }
 
+// TODO: get rid of this
 export const DEFAULT_CARDS_PER_HAND = 6;
-
-const counter = createCounter();
 
 export class Player implements IPlayer {
 	private cards: ICard[] = [];
-	private id: string = `Player_${String(counter())}`;
+
+	constructor(private cardsPerHand: number = DEFAULT_CARDS_PER_HAND) {}
 
 	getCards(): ICard[] {
 		return this.cards;
-	}
-
-	getId(): string {
-		return this.id;
 	}
 
 	withdraw(cards: ICard[]): ICard[] {
@@ -43,7 +37,7 @@ export class Player implements IPlayer {
 	}
 
 	fillHand(deck: IDeck): void {
-		const neededAmount = DEFAULT_CARDS_PER_HAND - this.cards.length;
+		const neededAmount = this.cardsPerHand - this.cards.length;
 		if (neededAmount > 0) {
 			this.pickCards(deck, neededAmount);
 		}

@@ -1,8 +1,6 @@
-import { Action, IAction } from '../../../common';
-import { IPlayer } from '../../../Player';
+import { Action, IAction, ICard, IPlayer } from '../../../core';
 import { IFoolGameRound } from '../../FoolGameRound';
-import { ICard } from '../../../Card';
-import { DEFAULT_RANKS } from '../../../Deck';
+import { DEFAULT_RANKS } from '../../FoolGameDeck';
 
 export class BeatAction extends Action implements IAction {
 	constructor(

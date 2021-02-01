@@ -1,8 +1,7 @@
 import { FoolGameRound } from '../../index';
-import { Deck, DEFAULT_RANKS } from '../../../Deck';
-import { IPlayer, Player } from '../../../Player';
+import { FoolGameDeck, DEFAULT_RANKS } from '../../FoolGameDeck';
 import { IFoolGameRound } from '../../FoolGameRound';
-import { Card } from '../../../Card';
+import { Card, IPlayer, Player } from '../../../core';
 import { PutAction } from './PutAction';
 
 let sam: IPlayer;
@@ -15,7 +14,7 @@ describe('FoolGame - PutAction', () => {
 		john = new Player();
 		round = new FoolGameRound({
 			players: [john, sam],
-			deck: new Deck({ ranks: DEFAULT_RANKS }),
+			deck: new FoolGameDeck({ ranks: DEFAULT_RANKS }),
 		});
 	});
 

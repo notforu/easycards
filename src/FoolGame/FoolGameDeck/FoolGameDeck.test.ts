@@ -1,12 +1,13 @@
-import { Deck, DEFAULT_RANKS, IDeck } from './Deck';
+import { FoolGameDeck, DEFAULT_RANKS } from './FoolGameDeck';
+import { IDeck } from '../../core';
 
 const six = '6';
 const seven = '7';
 let deck: IDeck;
 
-describe('Deck', () => {
+describe('FoolGameDeck', () => {
 	beforeEach(() => {
-		deck = new Deck({ ranks: DEFAULT_RANKS });
+		deck = new FoolGameDeck({ ranks: DEFAULT_RANKS });
 	});
 
 	test('Default deck size should be 36', () => {
@@ -25,13 +26,13 @@ describe('Deck', () => {
 	});
 
 	test('Deck should contain 4 cards of every specified rank, if customCounts is not specified', () => {
-		const customDeck = new Deck({ ranks: [six, seven] });
+		const customDeck = new FoolGameDeck({ ranks: [six, seven] });
 		expect(customDeck.getCards().filter((card) => card.getRank() === six)).toHaveLength(4);
 		expect(customDeck.getCards().filter((card) => card.getRank() === seven)).toHaveLength(4);
 	});
 
 	test('Should have custom amount of cards per rank, if customCount for this rank is specified', () => {
-		const customDeck = new Deck({
+		const customDeck = new FoolGameDeck({
 			ranks: DEFAULT_RANKS,
 			customCounts: {
 				[six]: 1,

@@ -1,9 +1,4 @@
-import { Card, ICard } from './Card';
-
-export interface IDeck {
-	getCards(): ICard[];
-	pick(): ICard | null;
-}
+import { Card, ICard, IDeck } from '../../core';
 
 export const DEFAULT_CARDS_PER_RANK = 4;
 export const DEFAULT_RANKS = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -13,7 +8,7 @@ export interface DeckOptions {
 	customCounts?: Record<string, number>;
 }
 
-export class Deck implements IDeck {
+export class FoolGameDeck implements IDeck {
 	private cards: ICard[] = [];
 
 	constructor(options: DeckOptions = { ranks: DEFAULT_RANKS }) {

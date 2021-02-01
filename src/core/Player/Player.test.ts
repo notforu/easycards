@@ -1,13 +1,14 @@
-import { Player, DEFAULT_CARDS_PER_HAND, IPlayer } from './Player';
-import { Deck, IDeck, DEFAULT_RANKS } from './Deck';
-import { Card } from './Card';
+import { Player, IPlayer, DEFAULT_CARDS_PER_HAND } from './Player';
+import { FoolGameDeck, DEFAULT_RANKS } from '../../FoolGame/FoolGameDeck/FoolGameDeck';
+import { Card } from '../Card';
+import { IDeck } from '../index';
 
 let deck: IDeck;
 let player: IPlayer;
 
 describe('Player', () => {
 	beforeEach(() => {
-		deck = new Deck({ ranks: DEFAULT_RANKS });
+		deck = new FoolGameDeck({ ranks: DEFAULT_RANKS });
 		player = new Player();
 	});
 

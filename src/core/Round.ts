@@ -1,6 +1,6 @@
-import { ICard } from '../Card';
-import { IPlayer } from '../Player';
-import { IDeck } from '../Deck';
+import { ICard } from './Card';
+import { IPlayer } from './Player';
+import { IDeck } from './Deck';
 
 export interface IRound {
 	start(): void;

@@ -1,6 +1,4 @@
-import { ICard } from '../Card';
-import { IRound, Round, RoundOptions } from '../common';
-import { IPlayer } from '../Player';
+import { IRound, Round, RoundOptions, IPlayer, ICard } from '../../core';
 
 export interface IFoolGameRound extends IRound {
 	getUnbeatenCards(): ICard[];
