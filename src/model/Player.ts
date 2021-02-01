@@ -8,6 +8,7 @@ export interface IPlayer extends Identifiable {
 	pickCards(deck: IDeck, amount: number): ICard[];
 	withdraw(cardIds: string[]): ICard[];
 	fillHand(deck: IDeck): void;
+	takeCards(cards: ICard[]): void;
 }
 
 export const DEFAULT_CARDS_PER_HAND = 6;
@@ -50,5 +51,9 @@ export class Player implements IPlayer {
 		if (neededAmount > 0) {
 			this.pickCards(deck, neededAmount);
 		}
+	}
+
+	takeCards(cards: ICard[]): void {
+		this.cards.push(...cards);
 	}
 }

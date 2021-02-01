@@ -1,5 +1,6 @@
 import { Player, DEFAULT_CARDS_PER_HAND, IPlayer } from './Player';
 import { Deck, IDeck, DEFAULT_RANKS } from './Deck';
+import { Card } from './Card';
 
 let deck: IDeck;
 let player: IPlayer;
@@ -37,5 +38,14 @@ describe('Player', () => {
 		const turn = player.withdraw([cards[0].getId(), cards[5].getId()]);
 		expect(cards[0]).toEqual(turn[0]);
 		expect(cards[5]).toEqual(turn[1]);
+	});
+
+	test('Should take exact cards', () => {
+		const ace = new Card({ rank: 'A' });
+		const six = new Card({ rank: '6' });
+		const cards = [ace, six];
+		player.takeCards(cards);
+		expect(player.getCards()).toContain(ace);
+		expect(player.getCards()).toContain(six);
 	});
 });
