@@ -1,15 +1,13 @@
 import { FoolGame } from './FoolGame';
 import { FoolGameDeck, DEFAULT_RANKS } from './FoolGameDeck';
-import { IGame, IPlayer, Player } from '../../core';
+import { IGame, Player } from '../../core';
 
-let sam: IPlayer;
-let john: IPlayer;
 let game: IGame;
 
 describe('Game - initial setup', () => {
 	beforeEach(() => {
-		sam = new Player();
-		john = new Player();
+		const sam = new Player();
+		const john = new Player();
 		game = new FoolGame({
 			deck: new FoolGameDeck({ ranks: DEFAULT_RANKS }),
 			players: [john, sam],
