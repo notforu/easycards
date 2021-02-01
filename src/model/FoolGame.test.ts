@@ -3,6 +3,7 @@ import { Deck, DEFAULT_RANKS, IDeck } from './Deck';
 import { DEFAULT_CARDS_PER_HAND, IPlayer, Player } from './Player';
 import { Board, IBoard } from './Board';
 import { Card } from './Card';
+import { IncorrectBeatError } from './utils/errors';
 
 let sam: IPlayer;
 let john: IPlayer;
@@ -46,5 +47,14 @@ describe('Game - initial setup', () => {
 		sam.takeCards([seven]);
 		game.beat(sam, six, seven);
 		expect(game.getBoard().getUnbeatenCards()).toHaveLength(0);
+	});
+
+	test('Opponent should not be able to beat with the lower card', () => {
+		const queen = new Card({ rank: 'Q' });
+		const seven = new Card({ rank: '7' });
+		john.takeCards([queen]);
+		game.startRound(john, [queen]);
+		sam.takeCards([seven]);
+		expect(() => game.beat(sam, queen, seven)).toThrowError(new IncorrectBeatError());
 	});
 });

@@ -1,7 +1,8 @@
 import { IPlayer } from './Player';
-import { IDeck } from './Deck';
+import { DEFAULT_RANKS, IDeck } from './Deck';
 import { IBoard } from './Board';
 import { ICard } from './Card';
+import { IncorrectBeatError } from './utils/errors';
 
 export interface IFoolGame {
 	start(): void;
@@ -54,6 +55,9 @@ export class FoolGame implements IFoolGame {
 	}
 
 	beat(player: IPlayer, target: ICard, card: ICard): void {
+		if (!this.canBeat(target, card)) {
+			throw new IncorrectBeatError();
+		}
 		return this.board.beat(target, card);
 	}
 
@@ -63,5 +67,9 @@ export class FoolGame implements IFoolGame {
 			return this.players[0];
 		}
 		return this.players[index + 1];
+	}
+
+	private canBeat(target: ICard, card: ICard): boolean {
+		return DEFAULT_RANKS.indexOf(target.getRank()) < DEFAULT_RANKS.indexOf(card.getRank());
 	}
 }
