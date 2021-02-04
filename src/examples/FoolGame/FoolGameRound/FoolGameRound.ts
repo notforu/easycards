@@ -4,22 +4,14 @@ export interface IFoolGameRound extends IRound {
 	getUnbeatenCards(): ICard[];
 	getCards(): Map<ICard, ICard | null>; // null if unbeaten
 	beat(player: IPlayer, target: ICard, card: ICard): void;
-	getCurrentPlayer(): IPlayer;
-}
-
-export interface FoolGameRoundOptions extends RoundOptions {
-	firstPlayer?: IPlayer;
 }
 
 export class FoolGameRound extends Round implements IFoolGameRound {
 	private readonly cards: Map<ICard, ICard | null>;
-	private currentPlayer: IPlayer;
 
-	constructor(options: FoolGameRoundOptions) {
+	constructor(options: RoundOptions) {
 		super(options);
-		const { firstPlayer = options.players[0] } = options;
 		this.cards = new Map<ICard, ICard | null>();
-		this.currentPlayer = firstPlayer;
 	}
 
 	start(): void {
@@ -28,7 +20,7 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 		}
 	}
 
-	put(player: IPlayer, cards: ICard[]): void {
+	putCards(player: IPlayer, cards: ICard[]): void {
 		if (this.cards.size === 0) {
 			this.currentPlayer = this.getNextPlayer();
 		}
@@ -53,10 +45,6 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 
 	beat(player: IPlayer, target: ICard, card: ICard): void {
 		this.cards.set(target, card);
-	}
-
-	getCurrentPlayer(): IPlayer {
-		return this.currentPlayer;
 	}
 
 	private getNextPlayer(): IPlayer {

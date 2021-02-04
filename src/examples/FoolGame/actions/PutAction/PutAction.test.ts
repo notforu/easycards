@@ -21,7 +21,7 @@ describe('FoolGame - PutAction', () => {
 	test('Should not be able to perform when game starts', () => {
 		const currentPlayer = round.getCurrentPlayer();
 		expect(
-			new PutAction(round, currentPlayer, currentPlayer.getCards()).canRun(),
+			new PutAction(currentPlayer, currentPlayer.getCards()).canRun(round),
 		).toBeTruthy();
 	});
 
@@ -29,7 +29,7 @@ describe('FoolGame - PutAction', () => {
 		const ace = new Card({ rank: 'A' });
 		const six = new Card({ rank: '6' });
 		john.takeCards([ace, six]);
-		new PutAction(round, john, [ace, six]).run();
+		new PutAction(john, [ace, six]).run(round);
 		expect(round.getCards().get(ace)).toBeNull();
 		expect(round.getCards().get(six)).toBeNull();
 	});

@@ -32,7 +32,7 @@ describe('Fool game round logic', () => {
 	test('Should return unbeaten card', () => {
 		const ace = new Card({ rank: 'A' });
 		john.takeCards([ace]);
-		round.put(john, [ace]);
+		round.putCards(john, [ace]);
 		expect(round.getUnbeatenCards()).toEqual([ace]);
 	});
 });

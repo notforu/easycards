@@ -22,10 +22,10 @@ describe('FoolGame - BeatAction', () => {
 	test('After first put opponent should be able to beat with the higher card', () => {
 		const six = new Card({ rank: '6' });
 		john.takeCards([six]);
-		new PutAction(round, john, [six]).run();
+		new PutAction(john, [six]).run(round);
 		const seven = new Card({ rank: '7' });
 		sam.takeCards([seven]);
-		new BeatAction(round, sam, six, seven).run();
+		new BeatAction(sam, six, seven).run(round);
 		expect(round.getUnbeatenCards()).toHaveLength(0);
 	});
 
@@ -33,9 +33,9 @@ describe('FoolGame - BeatAction', () => {
 		const queen = new Card({ rank: 'Q' });
 		const seven = new Card({ rank: '7' });
 		john.takeCards([queen]);
-		new PutAction(round, john, [queen]).run();
+		new PutAction(john, [queen]).run(round);
 		sam.takeCards([seven]);
-		expect(() => new BeatAction(round, sam, queen, seven).run()).toThrowError(
+		expect(() => new BeatAction(sam, queen, seven).run(round)).toThrowError(
 			new NotAllowedActionError(),
 		);
 	});
