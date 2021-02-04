@@ -19,7 +19,7 @@ describe('FoolGame - BeatAction', () => {
 		});
 	});
 
-	test('After first put opponent should be able to beat with the higher card', () => {
+	test('After put opponent should be able to beat with the higher card', () => {
 		const six = new Card({ rank: '6' });
 		john.takeCards([six]);
 		new PutAction(john, [six]).run(round);

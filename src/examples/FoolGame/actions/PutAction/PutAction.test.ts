@@ -33,4 +33,12 @@ describe('FoolGame - PutAction', () => {
 		expect(round.getCards().get(ace)).toBeNull();
 		expect(round.getCards().get(six)).toBeNull();
 	});
+
+	test('Should be able to put more cards with same ranks', () => {
+		const six1 = new Card({ rank: '6' });
+		const six2 = new Card({ rank: '6' });
+		john.takeCards([six1, six2]);
+		new PutAction(john, [six1]).run(round);
+		expect(new PutAction(john, [six2]).canRun(round)).toBeTruthy();
+	});
 });
