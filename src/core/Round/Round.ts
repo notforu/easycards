@@ -1,11 +1,12 @@
-import { ICard } from './Card';
-import { IPlayer } from './Player';
-import { IDeck } from './Deck';
+import { ICard } from '../Card';
+import { IPlayer } from '../Player';
+import { IDeck } from '../Deck';
 
 export interface IRound {
 	start(): void;
 	getCurrentPlayer(): IPlayer;
-	putCards(player: IPlayer, cards: ICard[]): void;
+	putCards(cards: ICard[]): void;
+	getCards(): ICard[];
 }
 
 export interface RoundOptions {
@@ -23,6 +24,7 @@ export class NotAllowedActionError extends Error {
 export abstract class Round implements IRound {
 	protected readonly players: IPlayer[];
 	protected readonly deck: IDeck;
+	protected readonly cards: ICard[];
 	protected currentPlayer: IPlayer;
 
 	constructor(options: RoundOptions) {
@@ -31,6 +33,7 @@ export abstract class Round implements IRound {
 		this.players = players;
 		this.deck = deck;
 		this.currentPlayer = firstPlayer;
+		this.cards = [];
 		this.start();
 	}
 
@@ -38,7 +41,13 @@ export abstract class Round implements IRound {
 		return this.currentPlayer;
 	}
 
-	abstract start(): void;
+	putCards(cards: ICard[]): void {
+		this.cards.push(...cards);
+	};
 
-	abstract putCards(player: IPlayer, cards: ICard[]): void;
+	getCards(): ICard[] {
+		return this.cards;
+	}
+
+	abstract start(): void;
 }

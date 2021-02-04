@@ -1,4 +1,4 @@
-import { ICard, IPlayer, Action, IAction, IRound } from '../../../../core';
+import { ICard, IPlayer, Action, IAction } from '../../../../core';
 import { IFoolGameRound } from '../../FoolGameRound';
 
 export class PutAction extends Action implements IAction {
@@ -8,11 +8,11 @@ export class PutAction extends Action implements IAction {
 
 	run(round: IFoolGameRound): void {
 		super.run(round);
-		round.putCards(this.player, this.cards);
+		this.player.putCards(round, this.cards);
 	}
 
 	canRun(round: IFoolGameRound): boolean {
-		return round.getCurrentPlayer() === this.player || this.hasSameRank(round.getUnbeatenCards());
+		return (round.getCards().length === 0 && round.getCurrentPlayer() === this.player) || this.hasSameRank(round.getUnbeatenCards());
 	}
 
 	private hasSameRank(unbeatenCards: ICard[]): boolean {

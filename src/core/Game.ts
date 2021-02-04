@@ -1,4 +1,4 @@
-import { IRound } from './Round';
+import { IRound } from './Round/Round';
 
 export interface IGame {
 	start(): void;

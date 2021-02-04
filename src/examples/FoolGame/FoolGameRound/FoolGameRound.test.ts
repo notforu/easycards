@@ -17,11 +17,7 @@ describe('Fool game round logic', () => {
 	});
 
 	test('Should be empty after being created', () => {
-		expect(round.getCards().size).toEqual(0);
-	});
-
-	test('First player should begin the game', () => {
-		expect(round.getCurrentPlayer()).toStrictEqual(john);
+		expect(round.getBeatMap().size).toEqual(0);
 	});
 
 	test('Every player should have 6 cards, when game starts', () => {
@@ -32,7 +28,17 @@ describe('Fool game round logic', () => {
 	test('Should return unbeaten card', () => {
 		const ace = new Card({ rank: 'A' });
 		john.takeCards([ace]);
-		round.putCards(john, [ace]);
+		john.putCards(round, [ace]);
 		expect(round.getUnbeatenCards()).toEqual([ace]);
+	});
+
+	test('Should be able to get all cards, including beaten', () => {
+		const jack = new Card({ rank: 'J' });
+		john.putCards(round, [jack]);
+		const ace = new Card({ rank: 'A' });
+		round.beat(sam, jack, ace);
+		expect(round.getCards()).toHaveLength(2);
+		expect(round.getCards()).toContain(jack);
+		expect(round.getCards()).toContain(ace);
 	});
 });

@@ -2,16 +2,16 @@ import { IRound, Round, RoundOptions, IPlayer, ICard } from '../../../core';
 
 export interface IFoolGameRound extends IRound {
 	getUnbeatenCards(): ICard[];
-	getCards(): Map<ICard, ICard | null>; // null if unbeaten
+	getBeatMap(): Map<ICard, ICard | null>; // null if unbeaten
 	beat(player: IPlayer, target: ICard, card: ICard): void;
 }
 
 export class FoolGameRound extends Round implements IFoolGameRound {
-	private readonly cards: Map<ICard, ICard | null>;
+	private readonly beatMap: Map<ICard, ICard | null>;
 
 	constructor(options: RoundOptions) {
 		super(options);
-		this.cards = new Map<ICard, ICard | null>();
+		this.beatMap = new Map<ICard, ICard | null>();
 	}
 
 	start(): void {
@@ -20,23 +20,24 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 		}
 	}
 
-	putCards(player: IPlayer, cards: ICard[]): void {
-		if (this.cards.size === 0) {
+	putCards(cards: ICard[]): void {
+		super.putCards(cards);
+		if (this.beatMap.size === 0) {
 			this.currentPlayer = this.getNextPlayer();
 		}
 		for (const card of cards) {
-			this.cards.set(card, null);
+			this.beatMap.set(card, null);
 		}
 	}
 
-	getCards(): Map<ICard, ICard | null> {
-		return this.cards;
+	getBeatMap(): Map<ICard, ICard | null> {
+		return this.beatMap;
 	}
 
 	getUnbeatenCards(): ICard[] {
 		const result: ICard[] = [];
-		for (const card of this.cards.keys()) {
-			if (this.cards.get(card) === null) {
+		for (const card of this.beatMap.keys()) {
+			if (this.beatMap.get(card) === null) {
 				result.push(card);
 			}
 		}
@@ -44,7 +45,8 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 	}
 
 	beat(player: IPlayer, target: ICard, card: ICard): void {
-		this.cards.set(target, card);
+		super.putCards([card]);
+		this.beatMap.set(target, card);
 	}
 
 	private getNextPlayer(): IPlayer {

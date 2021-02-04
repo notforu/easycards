@@ -30,8 +30,8 @@ describe('FoolGame - PutAction', () => {
 		const six = new Card({ rank: '6' });
 		john.takeCards([ace, six]);
 		new PutAction(john, [ace, six]).run(round);
-		expect(round.getCards().get(ace)).toBeNull();
-		expect(round.getCards().get(six)).toBeNull();
+		expect(round.getBeatMap().get(ace)).toBeNull();
+		expect(round.getBeatMap().get(six)).toBeNull();
 	});
 
 	test('Should be able to put more cards with same ranks', () => {
@@ -40,5 +40,14 @@ describe('FoolGame - PutAction', () => {
 		john.takeCards([six1, six2]);
 		new PutAction(john, [six1]).run(round);
 		expect(new PutAction(john, [six2]).canRun(round)).toBeTruthy();
+	});
+
+	test('Shouldn\'t be able to put, if needs to beat', () => {
+		const six = new Card({ rank: '6' });
+		const seven = new Card({ rank: '7' });
+		john.takeCards([six]);
+		sam.takeCards([seven]);
+		new PutAction(john, [six]).run(round);
+		expect(new PutAction(sam, [seven]).canRun(round)).toBeFalsy();
 	});
 });

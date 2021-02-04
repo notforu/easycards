@@ -1,5 +1,6 @@
 import { ICard } from '../Card';
 import { IDeck } from '../Deck';
+import { IRound } from '../Round';
 
 export interface IPlayer {
 	getCards(): ICard[];
@@ -7,6 +8,7 @@ export interface IPlayer {
 	withdraw(cards: ICard[]): ICard[];
 	fillHand(deck: IDeck): void;
 	takeCards(cards: ICard[]): void;
+	putCards(round: IRound, cards: ICard[]): void;
 }
 
 // TODO: get rid of this
@@ -45,5 +47,13 @@ export class Player implements IPlayer {
 
 	takeCards(cards: ICard[]): void {
 		this.cards.push(...cards);
+	}
+
+	putCards(round: IRound, cards: ICard[]): void {
+		for (const card of cards) {
+			const index = this.cards.indexOf(card);
+			this.cards.splice(index, 1);
+		}
+		round.putCards(cards);
 	}
 }

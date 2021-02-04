@@ -1,4 +1,4 @@
-export * from './Round';
+export * from './Round/Round';
 export * from './Action';
 export * from './Game';
 export * from './Deck';
