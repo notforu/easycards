@@ -1,4 +1,4 @@
-import { ICard } from '../Card';
+import { ICard } from '../Card/Card';
 import { IDeck } from '../Deck';
 import { IRound } from '../Round';
 

@@ -1,12 +1,13 @@
-import { Action, IAction, ICard, IPlayer, IRound } from '../../../../core';
+import { Action, IAction, IPlayer } from '../../../../core';
 import { IFoolGameRound } from '../../FoolGameRound';
 import { DEFAULT_RANKS } from '../../FoolGameDeck';
+import { IFoolGameCard } from '../../FoolGameCard';
 
 export class BeatAction extends Action implements IAction {
 	constructor(
 		private player: IPlayer,
-		private targetCard: ICard,
-		private card: ICard,
+		private targetCard: IFoolGameCard,
+		private card: IFoolGameCard,
 	) {
 		super();
 	}
@@ -17,7 +18,7 @@ export class BeatAction extends Action implements IAction {
 	}
 
 	canRun(round: IFoolGameRound): boolean {
-		const isHigher = DEFAULT_RANKS.indexOf(this.targetCard.getRank()) < DEFAULT_RANKS.indexOf(this.card.getRank());
+		const isHigher = DEFAULT_RANKS.indexOf(this.targetCard.getParams().rank) < DEFAULT_RANKS.indexOf(this.card.getParams().rank);
 		return (
 			round.getCurrentPlayer() === this.player && round.getUnbeatenCards().length > 0 && isHigher
 		);

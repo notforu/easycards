@@ -1,6 +1,6 @@
 import { IPlayer, Player } from '../Player';
 import { IRound, Round } from './Round';
-import { Card, ICard } from '../Card';
+import { Card } from '../Card';
 
 let sam: IPlayer;
 let john: IPlayer;
@@ -19,7 +19,6 @@ describe('Fool game round logic', () => {
 			deck: {
 				getCards: jest.fn(),
 				pick: jest.fn(),
-
 			}
 		});
 	});

@@ -1,4 +1,4 @@
-import { IRound, NotAllowedActionError } from './Round/Round';
+import { IRound, NotAllowedActionError } from './Round';
 
 export interface IAction {
 	run(round: IRound): void;

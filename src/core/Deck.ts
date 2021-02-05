@@ -1,6 +1,6 @@
 import { ICard } from './Card';
 
-export interface IDeck {
-	getCards(): ICard[];
-	pick(): ICard | null;
+export interface IDeck<Card extends ICard> {
+	getCards(): Card[];
+	pick(): Card | null;
 }

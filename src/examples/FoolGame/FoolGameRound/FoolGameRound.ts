@@ -1,17 +1,18 @@
-import { IRound, Round, RoundOptions, IPlayer, ICard } from '../../../core';
+import { IRound, Round, RoundOptions, IPlayer } from '../../../core';
+import { IFoolGameCard } from '../FoolGameCard';
 
 export interface IFoolGameRound extends IRound {
-	getUnbeatenCards(): ICard[];
-	getBeatMap(): Map<ICard, ICard | null>; // null if unbeaten
-	beat(player: IPlayer, target: ICard, card: ICard): void;
+	getUnbeatenCards(): IFoolGameCard[];
+	getBeatMap(): Map<IFoolGameCard, IFoolGameCard | null>; // null if unbeaten
+	beat(player: IPlayer, target: IFoolGameCard, card: IFoolGameCard): void;
 }
 
 export class FoolGameRound extends Round implements IFoolGameRound {
-	private readonly beatMap: Map<ICard, ICard | null>;
+	private readonly beatMap: Map<IFoolGameCard, IFoolGameCard | null>;
 
 	constructor(options: RoundOptions) {
 		super(options);
-		this.beatMap = new Map<ICard, ICard | null>();
+		this.beatMap = new Map<IFoolGameCard, IFoolGameCard | null>();
 	}
 
 	start(): void {
@@ -20,7 +21,7 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 		}
 	}
 
-	putCards(cards: ICard[]): void {
+	putCards(cards: IFoolGameCard[]): void {
 		super.putCards(cards);
 		if (this.beatMap.size === 0) {
 			this.currentPlayer = this.getNextPlayer();
@@ -30,12 +31,12 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 		}
 	}
 
-	getBeatMap(): Map<ICard, ICard | null> {
+	getBeatMap(): Map<IFoolGameCard, IFoolGameCard | null> {
 		return this.beatMap;
 	}
 
-	getUnbeatenCards(): ICard[] {
-		const result: ICard[] = [];
+	getUnbeatenCards(): IFoolGameCard[] {
+		const result: IFoolGameCard[] = [];
 		for (const card of this.beatMap.keys()) {
 			if (this.beatMap.get(card) === null) {
 				result.push(card);
@@ -44,7 +45,7 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 		return result;
 	}
 
-	beat(player: IPlayer, target: ICard, card: ICard): void {
+	beat(player: IPlayer, target: IFoolGameCard, card: IFoolGameCard): void {
 		super.putCards([card]);
 		this.beatMap.set(target, card);
 	}

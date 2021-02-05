@@ -1,8 +1,9 @@
-import { ICard, IPlayer, Action, IAction } from '../../../../core';
+import { IPlayer, Action, IAction } from '../../../../core';
 import { IFoolGameRound } from '../../FoolGameRound';
+import { IFoolGameCard } from '../../FoolGameCard';
 
 export class PutAction extends Action implements IAction {
-	constructor(private player: IPlayer, private cards: ICard[]) {
+	constructor(private player: IPlayer, private cards: IFoolGameCard[]) {
 		super();
 	}
 
@@ -15,8 +16,8 @@ export class PutAction extends Action implements IAction {
 		return (round.getCards().length === 0 && round.getCurrentPlayer() === this.player) || this.hasSameRank(round.getUnbeatenCards());
 	}
 
-	private hasSameRank(unbeatenCards: ICard[]): boolean {
-		const ranks = unbeatenCards.map(card => card.getRank());
-		return this.cards.some(card => ranks.includes(card.getRank()));
+	private hasSameRank(unbeatenCards: IFoolGameCard[]): boolean {
+		const ranks = unbeatenCards.map(card => card.getParams().rank);
+		return this.cards.some(card => ranks.includes(card.getParams().rank));
 	}
 }
