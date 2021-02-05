@@ -4,6 +4,7 @@ import { IFoolGameRound } from '../../FoolGameRound';
 import { Card, IPlayer, Player, NotAllowedActionError } from '../../../../core';
 import { PutAction } from '../PutAction';
 import { BeatAction } from './BeatAction';
+import { Suit } from '../../FoolGameCard';
 
 let sam: IPlayer;
 let john: IPlayer;
@@ -20,18 +21,18 @@ describe('FoolGame - BeatAction', () => {
 	});
 
 	test('After put opponent should be able to beat with the higher card', () => {
-		const six = new Card({ rank: '6' });
+		const six = new Card({ rank: '6', suit: Suit.Crosses });
 		john.takeCards([six]);
 		new PutAction(john, [six]).run(round);
-		const seven = new Card({ rank: '7' });
+		const seven = new Card({ rank: '7', suit: Suit.Crosses });
 		sam.takeCards([seven]);
 		new BeatAction(sam, six, seven).run(round);
 		expect(round.getUnbeatenCards()).toHaveLength(0);
 	});
 
 	test('Opponent should not be able to beat with the lower card', () => {
-		const queen = new Card({ rank: 'Q' });
-		const seven = new Card({ rank: '7' });
+		const queen = new Card({ rank: 'Q', suit: Suit.Crosses });
+		const seven = new Card({ rank: '7', suit: Suit.Crosses });
 		john.takeCards([queen]);
 		new PutAction(john, [queen]).run(round);
 		sam.takeCards([seven]);
@@ -39,4 +40,15 @@ describe('FoolGame - BeatAction', () => {
 			new NotAllowedActionError(),
 		);
 	});
+
+	test('Should not be able to beat with another suit if it is not empowered', () => {
+		const queen = new Card({ rank: 'Q', suit: Suit.Crosses });
+		const seven = new Card({ rank: '7', suit: Suit.Diamonds });
+		john.takeCards([seven]);
+		new PutAction(john, [seven]).run(round);
+		sam.takeCards([queen]);
+		expect(() => new BeatAction(sam, seven, queen).run(round)).toThrowError(
+			new NotAllowedActionError(),
+		);
+	})
 });
