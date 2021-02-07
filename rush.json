@@ -21,12 +21,12 @@
 	"variants": [],
 	"projects": [
 		{
-			"packageName": "easycards-core",
-			"projectFolder": "libs/easycards-core"
+			"packageName": "easycards",
+			"projectFolder": "libs/easycards"
 		},
 		{
-			"packageName": "easycards-foolgame",
-			"projectFolder": "games/easycards-foolgame"
+			"packageName": "foolgame",
+			"projectFolder": "games/foolgame"
 		}
 	]
 }

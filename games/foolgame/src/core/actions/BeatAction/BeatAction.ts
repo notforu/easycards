@@ -1,4 +1,4 @@
-import { Action, IAction, IPlayer } from '../../../../core';
+import { Action, IAction, IPlayer } from 'easycards';
 import { IFoolGameRound } from '../../FoolGameRound';
 import { DEFAULT_RANKS } from '../../FoolGameDeck';
 import { IFoolGameCard } from '../../FoolGameCard';

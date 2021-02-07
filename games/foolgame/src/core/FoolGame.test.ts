@@ -1,6 +1,6 @@
 import { FoolGame } from './FoolGame';
 import { FoolGameDeck, DEFAULT_RANKS } from './FoolGameDeck';
-import { IGame } from '../../core';
+import { IGame } from 'easycards';
 import { FoolGamePlayer } from './FoolGamePlayer';
 
 let game: IGame;

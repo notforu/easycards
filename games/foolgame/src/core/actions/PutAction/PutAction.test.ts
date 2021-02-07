@@ -1,7 +1,7 @@
 import { FoolGameRound } from '../../index';
 import { FoolGameDeck, DEFAULT_RANKS } from '../../FoolGameDeck';
 import { IFoolGameRound } from '../../FoolGameRound';
-import { Card } from '../../../../core';
+import { Card } from 'easycards';
 import { PutAction } from './PutAction';
 import { Suit } from '../../FoolGameCard';
 import { FoolGamePlayer, IFoolGamePlayer } from '../../FoolGamePlayer';

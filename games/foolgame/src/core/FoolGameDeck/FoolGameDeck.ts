@@ -1,4 +1,4 @@
-import { Card, Deck, IDeck } from '../../../core';
+import { Card, Deck, IDeck } from 'easycards';
 import { IFoolGameCard, Suit } from '../FoolGameCard';
 
 export const DEFAULT_CARDS_PER_RANK = 4;

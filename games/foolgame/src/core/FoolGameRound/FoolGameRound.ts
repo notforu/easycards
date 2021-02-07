@@ -1,4 +1,4 @@
-import { IRound, Round, RoundOptions, IPlayer } from '../../../core';
+import { IRound, Round, RoundOptions, IPlayer } from 'easycards';
 import { IFoolGameCard } from '../FoolGameCard';
 
 export interface IFoolGameRound extends IRound<IFoolGameCard> {

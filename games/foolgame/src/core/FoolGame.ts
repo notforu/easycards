@@ -1,5 +1,5 @@
 import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
-import { IGame } from '../../core';
+import { IGame } from 'easycards';
 import { IFoolGamePlayer } from './FoolGamePlayer';
 import { IFoolGameDeck } from './FoolGameDeck';
 

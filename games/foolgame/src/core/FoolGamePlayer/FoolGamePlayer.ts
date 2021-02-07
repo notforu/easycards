@@ -1,4 +1,4 @@
-import { IPlayer, Player } from '../../../core/Player';
+import { IPlayer, Player } from 'easycards';
 import { IFoolGameCard } from '../FoolGameCard';
 
 export type IFoolGamePlayer = IPlayer<IFoolGameCard>;

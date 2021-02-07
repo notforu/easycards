@@ -1,4 +1,4 @@
-import { ICard } from '../../../core/Card';
+import { ICard } from 'easycards';
 
 export enum Suit {
 	Crosses,

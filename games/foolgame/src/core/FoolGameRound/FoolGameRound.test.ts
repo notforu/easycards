@@ -1,6 +1,6 @@
 import { FoolGameDeck, DEFAULT_RANKS } from '../FoolGameDeck';
 import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
-import { Card } from '../../../core';
+import { Card } from 'easycards';
 import { Suit } from '../FoolGameCard';
 import { FoolGamePlayer, IFoolGamePlayer } from '../FoolGamePlayer';
 

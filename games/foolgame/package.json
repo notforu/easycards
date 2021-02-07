@@ -1,5 +1,5 @@
 {
-  "name": "easycards-foolgame",
+  "name": "foolgame",
   "version": "1.0.0",
   "description": "Game Fool built with easycards",
   "main": "index.js",
@@ -8,6 +8,7 @@
     "build": "tsc"
   },
   "devDependencies": {
+    "easycards": "workspace:*",
     "@babel/plugin-transform-modules-commonjs": "^7.12.1",
     "@types/jest": "^24.9.1",
     "husky": "^4.3.8",
