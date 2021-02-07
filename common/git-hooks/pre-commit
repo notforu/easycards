@@ -1,2 +1,2 @@
 #!/bin/sh
-prettier
+node common/scripts/install-run-rush.js prettier || exit $?
