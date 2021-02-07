@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"target": "es5",
 		"module": "esnext",
-		"lib": ["es2016"],
+		"lib": ["dom","es2016"],
 		"allowJs": true,
 		"outDir": "./build",
 		"downlevelIteration": true,
@@ -16,7 +16,8 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"jsx": "react-jsx"
+		"jsx": "react-jsx",
+		"types": ["jest"]
 	},
 	"include": ["src"]
 }

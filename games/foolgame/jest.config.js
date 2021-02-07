@@ -9,6 +9,9 @@ module.exports = {
 	coverageProvider: 'v8',
 	testEnvironment: 'node',
 	testPathIgnorePatterns: ['/node_modules/', '/build'],
+	setupFilesAfterEnv: [
+		"<rootDir>/src/setupTests.ts"
+	],
 	transform: {
 		'^.+\\.ts$': 'ts-jest',
 	},

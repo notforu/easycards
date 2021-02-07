@@ -1,2 +1,4 @@
 export * from './FoolGame';
-export * from './FoolGameRound/FoolGameRound';
+export * from './FoolGameRound';
+export * from './FoolGamePlayer';
+export * from './FoolGameDeck';
