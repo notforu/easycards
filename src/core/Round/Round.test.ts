@@ -1,29 +1,24 @@
 import { IPlayer, Player } from '../Player';
 import { IRound, Round } from './Round';
 import { Card } from '../Card';
+import { Deck } from '../Deck';
 
 let sam: IPlayer;
 let john: IPlayer;
 let round: IRound;
+const cardsPerHand = 6;
 
-class RoundMock extends Round {
-	start(): void {}
-}
-
-describe('Fool game round logic', () => {
+describe('Round', () => {
 	beforeEach(() => {
-		sam = new Player();
-		john = new Player();
-		round = new RoundMock({
+		sam = new Player({ cardsPerHand });
+		john = new Player({ cardsPerHand });
+		round = new Round({
 			players: [john, sam],
-			deck: {
-				getCards: jest.fn(),
-				pick: jest.fn(),
-			}
+			deck: new Deck()
 		});
 	});
 
-	test('First player should begin the game', () => {
+	test('First player should start the round by default', () => {
 		expect(round.getCurrentPlayer()).toStrictEqual(john);
 	});
 

@@ -1,34 +1,38 @@
-import { ICard } from '../Card/Card';
+import { ICard } from '../Card';
 import { IDeck } from '../Deck';
 import { IRound } from '../Round';
 
-export interface IPlayer {
-	getCards(): ICard[];
-	pickCards(deck: IDeck, amount: number): ICard[];
-	withdraw(cards: ICard[]): ICard[];
-	fillHand(deck: IDeck): void;
-	takeCards(cards: ICard[]): void;
-	putCards(round: IRound, cards: ICard[]): void;
+export interface IPlayer<Card extends ICard = ICard> {
+	getCards(): Card[];
+	pickCards(deck: IDeck<Card>, amount: number): Card[];
+	withdraw(cards: Card[]): Card[];
+	fillHand(deck: IDeck<Card>): void;
+	takeCards(cards: Card[]): void;
+	putCards(round: IRound, cards: Card[]): void;
 }
 
-// TODO: get rid of this
-export const DEFAULT_CARDS_PER_HAND = 6;
+export interface PlayerOptions {
+	cardsPerHand: number
+}
 
-export class Player implements IPlayer {
-	private cards: ICard[] = [];
+export class Player<Card extends ICard = ICard> implements IPlayer<Card> {
+	protected cards: Card[] = [];
+	private cardsPerHand: number;
 
-	constructor(private cardsPerHand: number = DEFAULT_CARDS_PER_HAND) {}
+	constructor(options: PlayerOptions) {
+		this.cardsPerHand = options.cardsPerHand;
+	}
 
-	getCards(): ICard[] {
+	getCards(): Card[] {
 		return this.cards;
 	}
 
-	withdraw(cards: ICard[]): ICard[] {
+	withdraw(cards: Card[]): Card[] {
 		this.cards = this.cards.filter(card => !cards.includes(card));
 		return cards;
 	}
 
-	pickCards(deck: IDeck, amount: number): ICard[] {
+	pickCards(deck: IDeck<Card>, amount: number): Card[] {
 		for (let i = 0; i < amount; i++) {
 			const card = deck.pick();
 			if (card !== null) {
@@ -38,18 +42,18 @@ export class Player implements IPlayer {
 		return this.cards;
 	}
 
-	fillHand(deck: IDeck): void {
+	fillHand(deck: IDeck<Card>): void {
 		const neededAmount = this.cardsPerHand - this.cards.length;
 		if (neededAmount > 0) {
 			this.pickCards(deck, neededAmount);
 		}
 	}
 
-	takeCards(cards: ICard[]): void {
+	takeCards(cards: Card[]): void {
 		this.cards.push(...cards);
 	}
 
-	putCards(round: IRound, cards: ICard[]): void {
+	putCards(round: IRound, cards: Card[]): void {
 		for (const card of cards) {
 			const index = this.cards.indexOf(card);
 			this.cards.splice(index, 1);

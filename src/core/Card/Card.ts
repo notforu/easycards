@@ -7,7 +7,7 @@ export interface ICard<Parameters extends CardParametersMap = {}> {
 export class Card<Parameters extends CardParametersMap = {}> implements ICard<Parameters> {
 	private params: Parameters;
 
-	constructor(options: Parameters) {
+	constructor(options: Parameters = {} as Parameters) {
 		this.params = options;
 	}
 

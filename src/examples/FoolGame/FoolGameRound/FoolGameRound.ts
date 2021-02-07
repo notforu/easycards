@@ -1,16 +1,18 @@
 import { IRound, Round, RoundOptions, IPlayer } from '../../../core';
 import { IFoolGameCard } from '../FoolGameCard';
 
-export interface IFoolGameRound extends IRound {
+export interface IFoolGameRound extends IRound<IFoolGameCard> {
 	getUnbeatenCards(): IFoolGameCard[];
 	getBeatMap(): Map<IFoolGameCard, IFoolGameCard | null>; // null if unbeaten
 	beat(player: IPlayer, target: IFoolGameCard, card: IFoolGameCard): void;
 }
 
-export class FoolGameRound extends Round implements IFoolGameRound {
+export type FoolGameRoundOptions = RoundOptions<IFoolGameCard>;
+
+export class FoolGameRound extends Round<IFoolGameCard> implements IFoolGameRound {
 	private readonly beatMap: Map<IFoolGameCard, IFoolGameCard | null>;
 
-	constructor(options: RoundOptions) {
+	constructor(options: FoolGameRoundOptions) {
 		super(options);
 		this.beatMap = new Map<IFoolGameCard, IFoolGameCard | null>();
 	}
@@ -50,7 +52,7 @@ export class FoolGameRound extends Round implements IFoolGameRound {
 		this.beatMap.set(target, card);
 	}
 
-	private getNextPlayer(): IPlayer {
+	private getNextPlayer(): IPlayer<IFoolGameCard> {
 		const index = this.players.indexOf(this.currentPlayer);
 		if (index === this.players.length - 1) {
 			return this.players[0];

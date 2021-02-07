@@ -1,15 +1,18 @@
 import { FoolGameDeck, DEFAULT_RANKS } from '../FoolGameDeck';
 import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
-import { Card, DEFAULT_CARDS_PER_HAND, IPlayer, Player } from '../../../core';
+import { Card, Player } from '../../../core';
+import { Suit } from '../FoolGameCard';
+import { IFoolGamePlayer } from '../FoolGamePlayer';
 
-let sam: IPlayer;
-let john: IPlayer;
+let sam: IFoolGamePlayer;
+let john: IFoolGamePlayer;
 let round: IFoolGameRound;
+const cardsPerHand = 6;
 
 describe('Fool game round logic', () => {
 	beforeEach(() => {
-		sam = new Player();
-		john = new Player();
+		sam = new Player({ cardsPerHand });
+		john = new Player({ cardsPerHand });
 		round = new FoolGameRound({
 			players: [john, sam],
 			deck: new FoolGameDeck({ ranks: DEFAULT_RANKS })
@@ -21,21 +24,21 @@ describe('Fool game round logic', () => {
 	});
 
 	test('Every player should have 6 cards, when game starts', () => {
-		expect(sam.getCards()).toHaveLength(DEFAULT_CARDS_PER_HAND);
-		expect(john.getCards()).toHaveLength(DEFAULT_CARDS_PER_HAND);
+		expect(sam.getCards()).toHaveLength(cardsPerHand);
+		expect(john.getCards()).toHaveLength(cardsPerHand);
 	});
 
 	test('Should return unbeaten card', () => {
-		const ace = new Card({ rank: 'A' });
+		const ace = new Card({ rank: 'A', suit: Suit.Crosses });
 		john.takeCards([ace]);
 		john.putCards(round, [ace]);
 		expect(round.getUnbeatenCards()).toEqual([ace]);
 	});
 
 	test('Should be able to get all cards, including beaten', () => {
-		const jack = new Card({ rank: 'J' });
+		const jack = new Card({ rank: 'J', suit: Suit.Crosses });
 		john.putCards(round, [jack]);
-		const ace = new Card({ rank: 'A' });
+		const ace = new Card({ rank: 'A', suit: Suit.Crosses });
 		round.beat(sam, jack, ace);
 		expect(round.getCards()).toHaveLength(2);
 		expect(round.getCards()).toContain(jack);

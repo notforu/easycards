@@ -13,17 +13,6 @@ describe('FoolGameDeck', () => {
 		expect(deck.getCards().length).toBe(36);
 	});
 
-	test('After picking a card, deck size should be decreased', () => {
-		deck.pick();
-		expect(deck.getCards()).toHaveLength(35);
-	});
-
-	test('Should pick last card', () => {
-		const cards = deck.getCards();
-		const lastCard = cards[cards.length - 1];
-		expect(deck.pick()).toEqual(lastCard);
-	});
-
 	test('Deck should contain 4 cards of every specified rank, if customCounts is not specified', () => {
 		const customDeck = new FoolGameDeck({ ranks: [six, seven] });
 		expect(customDeck.getCards().filter((card) => card.getParams().rank === six)).toHaveLength(4);

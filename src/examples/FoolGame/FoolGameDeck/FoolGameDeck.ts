@@ -1,5 +1,5 @@
-import { Card, IDeck } from '../../../core';
-import {IFoolGameCard, Suit } from '../FoolGameCard/FoolGameCard';
+import { Card, Deck, IDeck } from '../../../core';
+import { IFoolGameCard, Suit } from '../FoolGameCard';
 
 export const DEFAULT_CARDS_PER_RANK = 4;
 export const DEFAULT_RANKS = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -11,10 +11,9 @@ export interface DeckOptions {
 
 export type IFoolGameDeck = IDeck<IFoolGameCard>;
 
-export class FoolGameDeck implements IFoolGameDeck {
-	private cards: IFoolGameCard[] = [];
-
+export class FoolGameDeck extends Deck<IFoolGameCard> implements IDeck<IFoolGameCard> {
 	constructor(options: DeckOptions = { ranks: DEFAULT_RANKS }) {
+		super();
 		const { ranks, customCounts } = options;
 		for (const rank of ranks) {
 			const count = customCounts?.[rank] || DEFAULT_CARDS_PER_RANK;
@@ -22,13 +21,5 @@ export class FoolGameDeck implements IFoolGameDeck {
 				this.cards.push(new Card({ rank, suit: Suit.Crosses }));
 			}
 		}
-	}
-
-	getCards(): IFoolGameCard[] {
-		return this.cards;
-	}
-
-	pick(): IFoolGameCard | null {
-		return this.cards.pop() || null;
 	}
 }

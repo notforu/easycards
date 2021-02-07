@@ -1,19 +1,20 @@
 import { FoolGameRound } from '../../index';
 import { FoolGameDeck } from '../../FoolGameDeck';
 import { IFoolGameRound } from '../../FoolGameRound';
-import { Card, IPlayer, Player, NotAllowedActionError } from '../../../../core';
+import { Card, NotAllowedActionError } from '../../../../core';
 import { PutAction } from '../PutAction';
 import { BeatAction } from './BeatAction';
 import { Suit } from '../../FoolGameCard';
+import { FoolGamePlayer, IFoolGamePlayer } from '../../FoolGamePlayer';
 
-let sam: IPlayer;
-let john: IPlayer;
+let sam: IFoolGamePlayer;
+let john: IFoolGamePlayer;
 let round: IFoolGameRound;
 
 describe('FoolGame - BeatAction', () => {
 	beforeEach(() => {
-		sam = new Player();
-		john = new Player();
+		sam = new FoolGamePlayer();
+		john = new FoolGamePlayer();
 		round = new FoolGameRound({
 			players: [john, sam],
 			deck: new FoolGameDeck(),

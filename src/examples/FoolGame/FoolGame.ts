@@ -1,14 +1,16 @@
 import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
-import { IGame, IDeck, IPlayer } from '../../core';
+import { IGame } from '../../core';
+import { IFoolGamePlayer } from './FoolGamePlayer';
+import { IFoolGameDeck } from './FoolGameDeck';
 
 export interface GameOptions {
-	players: IPlayer[];
-	deck: IDeck;
+	players: IFoolGamePlayer[];
+	deck: IFoolGameDeck;
 }
 
 export class FoolGame implements IGame {
-	private readonly players: IPlayer[];
-	private readonly deck: IDeck;
+	private readonly players: IFoolGamePlayer[];
+	private readonly deck: IFoolGameDeck;
 	private currentRound: IFoolGameRound;
 
 	constructor(options: GameOptions) {

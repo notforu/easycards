@@ -1,15 +1,16 @@
-import { Player, IPlayer, DEFAULT_CARDS_PER_HAND } from './Player';
-import { FoolGameDeck, DEFAULT_RANKS } from '../../examples/FoolGame/FoolGameDeck/FoolGameDeck';
-import { Card } from '../Card/Card';
-import { IDeck } from '../index';
+import { Player, IPlayer } from './Player';
+import { Card } from '../Card';
+import { Deck, IDeck } from '../';
 
 let deck: IDeck;
 let player: IPlayer;
+const cardsPerHand = 4;
 
 describe('Player', () => {
 	beforeEach(() => {
-		deck = new FoolGameDeck({ ranks: DEFAULT_RANKS });
-		player = new Player();
+		deck = new Deck();
+		deck.addCards(new Array(20).fill(null).map(() => new Card()));
+		player = new Player({ cardsPerHand });
 	});
 
 	test('Should have an empty hand after being created', () => {
@@ -18,22 +19,22 @@ describe('Player', () => {
 
 	test('Should pick specified amount of cards', () => {
 		expect(player.getCards()).toHaveLength(0);
-		const pickedCards = player.pickCards(deck, DEFAULT_CARDS_PER_HAND);
+		const pickedCards = player.pickCards(deck, cardsPerHand);
 		expect(player.getCards()).toStrictEqual(pickedCards);
 	});
 
 	test('Should fill hand if it is empty', () => {
 		player.fillHand(deck);
-		expect(player.getCards()).toHaveLength(DEFAULT_CARDS_PER_HAND);
+		expect(player.getCards()).toHaveLength(cardsPerHand);
 	});
 
-	test('Turn should decrease hand size', () => {
+	test('Withdraw should decrease hand size', () => {
 		player.fillHand(deck);
 		player.withdraw([player.getCards()[0]]);
-		expect(player.getCards()).toHaveLength(DEFAULT_CARDS_PER_HAND - 1);
+		expect(player.getCards()).toHaveLength(cardsPerHand - 1);
 	});
 
-	test('Should turn with exact cards', () => {
+	test('Should withdraw exact cards', () => {
 		player.fillHand(deck);
 		const cards = player.getCards();
 		const turn = player.withdraw([cards[0], cards[5]]);
