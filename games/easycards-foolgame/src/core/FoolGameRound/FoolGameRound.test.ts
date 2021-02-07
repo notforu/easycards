@@ -15,7 +15,7 @@ describe('Fool game round logic', () => {
 		john = new FoolGamePlayer();
 		round = new FoolGameRound({
 			players: [john, sam],
-			deck: new FoolGameDeck({ ranks: DEFAULT_RANKS })
+			deck: new FoolGameDeck({ ranks: DEFAULT_RANKS }),
 		});
 	});
 

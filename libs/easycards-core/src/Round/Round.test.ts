@@ -14,7 +14,7 @@ describe('Round', () => {
 		john = new Player({ cardsPerHand });
 		round = new Round({
 			players: [john, sam],
-			deck: new Deck()
+			deck: new Deck(),
 		});
 	});
 

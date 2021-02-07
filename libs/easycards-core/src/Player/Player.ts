@@ -12,7 +12,7 @@ export interface IPlayer<Card extends ICard = ICard> {
 }
 
 export interface PlayerOptions {
-	cardsPerHand: number
+	cardsPerHand: number;
 }
 
 export class Player<Card extends ICard = ICard> implements IPlayer<Card> {
@@ -28,7 +28,7 @@ export class Player<Card extends ICard = ICard> implements IPlayer<Card> {
 	}
 
 	withdraw(cards: Card[]): Card[] {
-		this.cards = this.cards.filter(card => !cards.includes(card));
+		this.cards = this.cards.filter((card) => !cards.includes(card));
 		return cards;
 	}
 

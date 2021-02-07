@@ -43,7 +43,7 @@ export class Round<Card extends ICard = ICard> implements IRound<Card> {
 
 	putCards(cards: Card[]): void {
 		this.cards.push(...cards);
-	};
+	}
 
 	getCards(): Card[] {
 		return this.cards;

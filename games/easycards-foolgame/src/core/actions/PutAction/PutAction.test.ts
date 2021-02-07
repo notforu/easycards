@@ -22,12 +22,10 @@ describe('FoolGame - PutAction', () => {
 
 	test('Should not be able to perform when game starts', () => {
 		const currentPlayer = round.getCurrentPlayer();
-		expect(
-			new PutAction(currentPlayer, currentPlayer.getCards()).canRun(round),
-		).toBeTruthy();
+		expect(new PutAction(currentPlayer, currentPlayer.getCards()).canRun(round)).toBeTruthy();
 	});
 
-	test('Should have exact cards player\'s after turn', () => {
+	test("Should have exact cards player's after turn", () => {
 		const ace = new Card({ rank: 'A', suit: Suit.Crosses });
 		const six = new Card({ rank: '6', suit: Suit.Crosses });
 		john.takeCards([ace, six]);
@@ -44,7 +42,7 @@ describe('FoolGame - PutAction', () => {
 		expect(new PutAction(john, [six2]).canRun(round)).toBeTruthy();
 	});
 
-	test('Shouldn\'t be able to put, if needs to beat', () => {
+	test("Shouldn't be able to put, if needs to beat", () => {
 		const six = new Card({ rank: '6', suit: Suit.Crosses });
 		const seven = new Card({ rank: '7', suit: Suit.Crosses });
 		john.takeCards([six]);

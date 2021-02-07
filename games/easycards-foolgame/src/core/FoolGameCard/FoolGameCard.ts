@@ -4,7 +4,7 @@ export enum Suit {
 	Crosses,
 	Hearts,
 	Spades,
-	Diamonds
+	Diamonds,
 }
 
 export interface FoolCardParameters {

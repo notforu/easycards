@@ -18,10 +18,15 @@ export class BeatAction extends Action implements IAction {
 	}
 
 	canRun(round: IFoolGameRound): boolean {
-		const isHigher = DEFAULT_RANKS.indexOf(this.targetCard.getParams().rank) < DEFAULT_RANKS.indexOf(this.card.getParams().rank);
+		const isHigher =
+			DEFAULT_RANKS.indexOf(this.targetCard.getParams().rank) <
+			DEFAULT_RANKS.indexOf(this.card.getParams().rank);
 		const sameSuit = this.targetCard.getParams().suit === this.card.getParams().suit;
 		return (
-			round.getCurrentPlayer() === this.player && round.getUnbeatenCards().length > 0 && isHigher && sameSuit
+			round.getCurrentPlayer() === this.player &&
+			round.getUnbeatenCards().length > 0 &&
+			isHigher &&
+			sameSuit
 		);
 	}
 }

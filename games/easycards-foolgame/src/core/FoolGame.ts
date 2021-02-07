@@ -22,7 +22,7 @@ export class FoolGame implements IGame {
 		this.deck = deck;
 		this.currentRound = new FoolGameRound({
 			deck: this.deck,
-			players: this.players
+			players: this.players,
 		});
 	}
 

@@ -13,11 +13,14 @@ export class PutAction extends Action implements IAction {
 	}
 
 	canRun(round: IFoolGameRound): boolean {
-		return (round.getCards().length === 0 && round.getCurrentPlayer() === this.player) || this.hasSameRank(round.getUnbeatenCards());
+		return (
+			(round.getCards().length === 0 && round.getCurrentPlayer() === this.player) ||
+			this.hasSameRank(round.getUnbeatenCards())
+		);
 	}
 
 	private hasSameRank(unbeatenCards: IFoolGameCard[]): boolean {
-		const ranks = unbeatenCards.map(card => card.getParams().rank);
-		return this.cards.some(card => ranks.includes(card.getParams().rank));
+		const ranks = unbeatenCards.map((card) => card.getParams().rank);
+		return this.cards.some((card) => ranks.includes(card.getParams().rank));
 	}
 }

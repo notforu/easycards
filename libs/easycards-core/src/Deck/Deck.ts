@@ -3,7 +3,7 @@ import { ICard } from '../Card';
 export interface IDeck<Card extends ICard = ICard> {
 	getCards(): Card[];
 	pick(): Card | null;
-	addCards(cards: Card[]): void
+	addCards(cards: Card[]): void;
 }
 
 export class Deck<Card extends ICard = ICard> implements IDeck<Card> {

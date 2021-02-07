@@ -51,5 +51,5 @@ describe('FoolGame - BeatAction', () => {
 		expect(() => new BeatAction(sam, seven, queen).run(round)).toThrowError(
 			new NotAllowedActionError(),
 		);
-	})
+	});
 });

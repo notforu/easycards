@@ -10,4 +10,3 @@ export class FoolGamePlayer extends Player<IFoolGameCard> implements IFoolGamePl
 		super({ cardsPerHand: DEFAULT_CARDS_PER_HAND });
 	}
 }
-
