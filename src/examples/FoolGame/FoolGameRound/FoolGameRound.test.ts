@@ -1,8 +1,8 @@
 import { FoolGameDeck, DEFAULT_RANKS } from '../FoolGameDeck';
 import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
-import { Card, Player } from '../../../core';
+import { Card } from '../../../core';
 import { Suit } from '../FoolGameCard';
-import { IFoolGamePlayer } from '../FoolGamePlayer';
+import { FoolGamePlayer, IFoolGamePlayer } from '../FoolGamePlayer';
 
 let sam: IFoolGamePlayer;
 let john: IFoolGamePlayer;
@@ -11,8 +11,8 @@ const cardsPerHand = 6;
 
 describe('Fool game round logic', () => {
 	beforeEach(() => {
-		sam = new Player({ cardsPerHand });
-		john = new Player({ cardsPerHand });
+		sam = new FoolGamePlayer();
+		john = new FoolGamePlayer();
 		round = new FoolGameRound({
 			players: [john, sam],
 			deck: new FoolGameDeck({ ranks: DEFAULT_RANKS })

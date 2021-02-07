@@ -25,7 +25,7 @@ describe('Fool game round logic', function () {
         expect(john.getCards()).toHaveLength(cardsPerHand);
     });
     test('Should return unbeaten card', function () {
-        var ace = new core_1.Card({ rank: 'A' });
+        var ace = new core_1.Card({ rank: 'A', suit: FoolGameCard_1.Suit.Crosses });
         john.takeCards([ace]);
         john.putCards(round, [ace]);
         expect(round.getUnbeatenCards()).toEqual([ace]);
