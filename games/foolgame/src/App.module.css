@@ -1,36 +1,45 @@
 .App {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.p1, .p2, .board, .deck {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.p1,
+.p2,
+.board,
+.deck {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .game > .p2 {
-    grid-area: p2;
+	grid-area: p2;
 }
 
 .game > .p1 {
-    grid-area: p1;
+	grid-area: p1;
 }
 
 .game > .board {
-    grid-area: board;
+	grid-area: board;
 }
 
 .game > .deck {
-    grid-area: deck;
+	grid-area: deck;
 }
 
 .game {
-    display: grid;
-    width: 100%;
-    height: 600px;
-    grid-template-areas: ". p2 ."
-                         ". board deck"
-                         ". p1 .";
+	display: grid;
+	width: 100%;
+	height: 600px;
+	grid-template-areas:
+		'. p2 .'
+		'. board deck'
+		'. p1 .';
+}
+
+.card {
+	width: 20px;
+	height: 40px;
 }

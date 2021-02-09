@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"target": "es5",
 		"module": "esnext",
-		"lib": ["dom","es2016"],
+		"lib": ["dom", "es2016"],
 		"allowJs": true,
 		"outDir": "./build",
 		"downlevelIteration": true,
@@ -19,5 +19,5 @@
 		"jsx": "react-jsx",
 		"types": ["jest"]
 	},
-	"include": ["src"]
+	"include": ["src", "global.d.ts"]
 }

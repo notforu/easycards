@@ -1,11 +1,10 @@
-import { FoolGame } from './FoolGame';
+import { FoolGame, IFoolGame } from './FoolGame';
 import { FoolGameDeck, DEFAULT_RANKS } from './FoolGameDeck';
-import { IGame } from 'easycards';
 import { FoolGamePlayer } from './FoolGamePlayer';
 
-let game: IGame;
+let game: IFoolGame;
 
-describe('Game - initial setup', () => {
+describe('FoolGame', () => {
 	beforeEach(() => {
 		const sam = new FoolGamePlayer();
 		const john = new FoolGamePlayer();

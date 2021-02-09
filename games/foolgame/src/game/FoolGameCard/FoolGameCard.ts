@@ -1,10 +1,10 @@
 import { ICard } from 'easycards';
 
 export enum Suit {
-	Crosses,
-	Hearts,
-	Spades,
-	Diamonds,
+	Clubs = '♣',
+	Hearts = '♥',
+	Spades = '♠',
+	Diamonds = '♦',
 }
 
 export interface FoolCardParameters {

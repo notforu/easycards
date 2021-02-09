@@ -26,8 +26,8 @@ describe('FoolGame - PutAction', () => {
 	});
 
 	test("Should have exact cards player's after turn", () => {
-		const ace = new Card({ rank: 'A', suit: Suit.Crosses });
-		const six = new Card({ rank: '6', suit: Suit.Crosses });
+		const ace = new Card({ rank: 'A', suit: Suit.Clubs });
+		const six = new Card({ rank: '6', suit: Suit.Clubs });
 		john.takeCards([ace, six]);
 		new PutAction(john, [ace, six]).run(round);
 		expect(round.getBeatMap().get(ace)).toBeNull();
@@ -35,16 +35,16 @@ describe('FoolGame - PutAction', () => {
 	});
 
 	test('Should be able to put more cards with same ranks', () => {
-		const six1 = new Card({ rank: '6', suit: Suit.Crosses });
-		const six2 = new Card({ rank: '6', suit: Suit.Crosses });
+		const six1 = new Card({ rank: '6', suit: Suit.Clubs });
+		const six2 = new Card({ rank: '6', suit: Suit.Clubs });
 		john.takeCards([six1, six2]);
 		new PutAction(john, [six1]).run(round);
 		expect(new PutAction(john, [six2]).canRun(round)).toBeTruthy();
 	});
 
 	test("Shouldn't be able to put, if needs to beat", () => {
-		const six = new Card({ rank: '6', suit: Suit.Crosses });
-		const seven = new Card({ rank: '7', suit: Suit.Crosses });
+		const six = new Card({ rank: '6', suit: Suit.Clubs });
+		const seven = new Card({ rank: '7', suit: Suit.Clubs });
 		john.takeCards([six]);
 		sam.takeCards([seven]);
 		new PutAction(john, [six]).run(round);

@@ -29,16 +29,16 @@ describe('Fool game round logic', () => {
 	});
 
 	test('Should return unbeaten card', () => {
-		const ace = new Card({ rank: 'A', suit: Suit.Crosses });
+		const ace = new Card({ rank: 'A', suit: Suit.Clubs });
 		john.takeCards([ace]);
 		john.putCards(round, [ace]);
 		expect(round.getUnbeatenCards()).toEqual([ace]);
 	});
 
 	test('Should be able to get all cards, including beaten', () => {
-		const jack = new Card({ rank: 'J', suit: Suit.Crosses });
+		const jack = new Card({ rank: 'J', suit: Suit.Clubs });
 		john.putCards(round, [jack]);
-		const ace = new Card({ rank: 'A', suit: Suit.Crosses });
+		const ace = new Card({ rank: 'A', suit: Suit.Clubs });
 		round.beat(sam, jack, ace);
 		expect(round.getCards()).toHaveLength(2);
 		expect(round.getCards()).toContain(jack);

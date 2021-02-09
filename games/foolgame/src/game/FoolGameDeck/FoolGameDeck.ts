@@ -18,7 +18,7 @@ export class FoolGameDeck extends Deck<IFoolGameCard> implements IDeck<IFoolGame
 		for (const rank of ranks) {
 			const count = customCounts?.[rank] || DEFAULT_CARDS_PER_RANK;
 			for (let i = 0; i < count; i++) {
-				this.cards.push(new Card({ rank, suit: Suit.Crosses }));
+				this.cards.push(new Card({ rank, suit: Suit.Clubs }));
 			}
 		}
 	}

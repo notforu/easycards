@@ -1,34 +1,29 @@
-import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
-import { IGame } from 'easycards';
+import { IGame, Game } from 'easycards';
+import { FoolGameRound } from './FoolGameRound';
 import { IFoolGamePlayer } from './FoolGamePlayer';
 import { IFoolGameDeck } from './FoolGameDeck';
+import { IFoolGameCard } from './FoolGameCard';
 
 export interface GameOptions {
 	players: IFoolGamePlayer[];
 	deck: IFoolGameDeck;
 }
 
-export class FoolGame implements IGame {
-	private readonly players: IFoolGamePlayer[];
-	private readonly deck: IFoolGameDeck;
-	private currentRound: IFoolGameRound;
+export type IFoolGame = IGame<IFoolGameCard>;
 
+export class FoolGame extends Game<IFoolGameCard> implements IFoolGame {
 	constructor(options: GameOptions) {
+		super(options);
 		const { players, deck } = options;
 		if (players.length < 2) {
 			throw new Error('Must be at least 2 players');
 		}
-		this.players = players;
-		this.deck = deck;
+	}
+
+	start(): void {
 		this.currentRound = new FoolGameRound({
 			deck: this.deck,
 			players: this.players,
 		});
-	}
-
-	start(): void {}
-
-	getCurrentRound(): IFoolGameRound {
-		return this.currentRound;
 	}
 }

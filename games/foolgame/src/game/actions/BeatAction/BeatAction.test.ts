@@ -22,18 +22,18 @@ describe('FoolGame - BeatAction', () => {
 	});
 
 	test('After put opponent should be able to beat with the higher card', () => {
-		const six = new Card({ rank: '6', suit: Suit.Crosses });
+		const six = new Card({ rank: '6', suit: Suit.Clubs });
 		john.takeCards([six]);
 		new PutAction(john, [six]).run(round);
-		const seven = new Card({ rank: '7', suit: Suit.Crosses });
+		const seven = new Card({ rank: '7', suit: Suit.Clubs });
 		sam.takeCards([seven]);
 		new BeatAction(sam, six, seven).run(round);
 		expect(round.getUnbeatenCards()).toHaveLength(0);
 	});
 
 	test('Opponent should not be able to beat with the lower card', () => {
-		const queen = new Card({ rank: 'Q', suit: Suit.Crosses });
-		const seven = new Card({ rank: '7', suit: Suit.Crosses });
+		const queen = new Card({ rank: 'Q', suit: Suit.Clubs });
+		const seven = new Card({ rank: '7', suit: Suit.Clubs });
 		john.takeCards([queen]);
 		new PutAction(john, [queen]).run(round);
 		sam.takeCards([seven]);
@@ -43,7 +43,7 @@ describe('FoolGame - BeatAction', () => {
 	});
 
 	test('Should not be able to beat with another suit if it is not empowered', () => {
-		const queen = new Card({ rank: 'Q', suit: Suit.Crosses });
+		const queen = new Card({ rank: 'Q', suit: Suit.Clubs });
 		const seven = new Card({ rank: '7', suit: Suit.Diamonds });
 		john.takeCards([seven]);
 		new PutAction(john, [seven]).run(round);
