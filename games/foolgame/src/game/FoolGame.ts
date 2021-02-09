@@ -14,7 +14,7 @@ export type IFoolGame = IGame<IFoolGameCard>;
 export class FoolGame extends Game<IFoolGameCard> implements IFoolGame {
 	constructor(options: GameOptions) {
 		super(options);
-		const { players, deck } = options;
+		const { players } = options;
 		if (players.length < 2) {
 			throw new Error('Must be at least 2 players');
 		}

@@ -1,8 +1,13 @@
-import { FoolGameDeck, DEFAULT_RANKS, IFoolGameDeck } from './FoolGameDeck';
+import { DEFAULT_RANKS, FoolGameDeck, IFoolGameDeck } from './FoolGameDeck';
+import { IFoolGameCard, Suit } from '../FoolGameCard';
 
 const six = '6';
 const seven = '7';
 let deck: IFoolGameDeck;
+
+function filterBySuit(cards: IFoolGameCard[], suit: Suit): IFoolGameCard[] {
+	return cards.filter((card) => card.getParams().suit === suit);
+}
 
 describe('FoolGameDeck', () => {
 	beforeEach(() => {
@@ -27,5 +32,13 @@ describe('FoolGameDeck', () => {
 			},
 		});
 		expect(customDeck.getCards().filter((card) => card.getParams().rank === six)).toHaveLength(1);
+	});
+
+	test('Should be 4 cards of every suit in each rank', () => {
+		const customDeck = new FoolGameDeck({ ranks: [six] });
+		expect(filterBySuit(customDeck.getCards(), Suit.Diamonds)).toHaveLength(1);
+		expect(filterBySuit(customDeck.getCards(), Suit.Clubs)).toHaveLength(1);
+		expect(filterBySuit(customDeck.getCards(), Suit.Hearts)).toHaveLength(1);
+		expect(filterBySuit(customDeck.getCards(), Suit.Spades)).toHaveLength(1);
 	});
 });
