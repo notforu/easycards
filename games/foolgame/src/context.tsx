@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import {
 	FoolGame,
 	FoolGamePlayer,
@@ -6,17 +6,17 @@ import {
 	FoolGameDeck,
 	IFoolGame,
 	IFoolGamePlayer,
+	IFoolGameCard,
 } from './game';
 
 export interface FoolGameContextValues {
-	game: IFoolGame | null;
-	activePlayer: IFoolGamePlayer | null;
+	game: IFoolGame;
+	activePlayer: IFoolGamePlayer;
+	selectedCards: IFoolGameCard[];
+	setSelectedCards: (cards: IFoolGameCard[]) => void;
 }
 
-export const FoolGameContext = createContext<FoolGameContextValues>({
-	game: null,
-	activePlayer: null,
-});
+export const FoolGameContext = createContext<FoolGameContextValues>({} as FoolGameContextValues);
 
 const sam = new FoolGamePlayer();
 const john = new FoolGamePlayer();
@@ -32,8 +32,9 @@ export interface FoolGameProviderProps {
 }
 
 export function FoolGameProvider(props: FoolGameProviderProps): JSX.Element {
+	const [selectedCards, setSelectedCards] = useState<IFoolGameCard[]>([]);
 	return (
-		<FoolGameContext.Provider value={{ game, activePlayer: john }}>
+		<FoolGameContext.Provider value={{ game, activePlayer: john, selectedCards, setSelectedCards }}>
 			{props.children}
 		</FoolGameContext.Provider>
 	);

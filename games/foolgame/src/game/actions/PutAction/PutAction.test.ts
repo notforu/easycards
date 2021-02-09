@@ -50,4 +50,8 @@ describe('FoolGame - PutAction', () => {
 		new PutAction(john, [six]).run(round);
 		expect(new PutAction(sam, [seven]).canRun(round)).toBeFalsy();
 	});
+
+	test("Shouldn't be able to put empty array of cards", () => {
+		expect(new PutAction(john, []).canRun(round)).toBeFalsy();
+	});
 });

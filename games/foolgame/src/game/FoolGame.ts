@@ -1,5 +1,5 @@
 import { IGame, Game } from 'easycards';
-import { FoolGameRound } from './FoolGameRound';
+import { FoolGameRound, IFoolGameRound } from './FoolGameRound';
 import { IFoolGamePlayer } from './FoolGamePlayer';
 import { IFoolGameDeck } from './FoolGameDeck';
 import { IFoolGameCard } from './FoolGameCard';
@@ -9,9 +9,9 @@ export interface GameOptions {
 	deck: IFoolGameDeck;
 }
 
-export type IFoolGame = IGame<IFoolGameCard>;
+export type IFoolGame = IGame<IFoolGameCard, IFoolGameRound>;
 
-export class FoolGame extends Game<IFoolGameCard> implements IFoolGame {
+export class FoolGame extends Game<IFoolGameCard, IFoolGameRound> implements IFoolGame {
 	constructor(options: GameOptions) {
 		super(options);
 		const { players } = options;

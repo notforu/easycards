@@ -7,6 +7,7 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	cursor: pointer;
 
 	.suit {
 		/*position: absolute;
@@ -24,5 +25,16 @@
 
 	&.facedown {
 		background: repeating-linear-gradient(45deg, #606dbc, #606dbc 10px, #465298 10px, #465298 20px);
+	}
+
+	&:hover {
+		background: #ccffcc;
+	}
+
+	&.selected {
+		height: 70px;
+		width: 45px;
+		background: #88ff88;
+		border-width: 2px;
 	}
 }

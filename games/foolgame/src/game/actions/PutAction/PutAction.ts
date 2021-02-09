@@ -13,6 +13,9 @@ export class PutAction extends Action implements IAction {
 	}
 
 	canRun(round: IFoolGameRound): boolean {
+		if (this.cards.length === 0) {
+			return false;
+		}
 		return (
 			(round.getCards().length === 0 && round.getCurrentPlayer() === this.player) ||
 			this.hasSameRank(round.getUnbeatenCards())

@@ -4,6 +4,8 @@ import s from './Card.module.scss';
 
 export interface CardProps {
 	card: IFoolGameCard;
+	onClick?: (e: React.MouseEvent) => void;
+	isSelected?: boolean;
 	facedown?: boolean;
 	className?: string;
 }
@@ -16,7 +18,7 @@ const mapSuitToClassName = {
 };
 
 export function Card(props: CardProps): JSX.Element {
-	const { card, className, facedown } = props;
+	const { card, className, facedown, isSelected, onClick } = props;
 
 	return (
 		<div
@@ -24,8 +26,10 @@ export function Card(props: CardProps): JSX.Element {
 				s.card,
 				mapSuitToClassName[card.getParams().suit],
 				facedown && s.facedown,
+				isSelected && s.selected,
 				className,
 			)}
+			onClick={onClick}
 		>
 			{!facedown && (
 				<>

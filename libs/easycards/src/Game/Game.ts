@@ -3,9 +3,9 @@ import { IRound } from '../Round';
 import { IPlayer } from '../Player';
 import { IDeck } from '../Deck';
 
-export interface IGame<Card extends ICard = ICard> {
+export interface IGame<Card extends ICard = ICard, Round extends IRound = IRound<Card>> {
 	start(): void;
-	getCurrentRound(): IRound<Card> | null;
+	getCurrentRound(): Round | null;
 	getPlayers(): IPlayer<Card>[];
 	getDeck(): IDeck<Card>;
 }
@@ -15,10 +15,11 @@ export interface GameOptions<Card extends ICard = ICard> {
 	deck: IDeck<Card>;
 }
 
-export class Game<Card extends ICard = ICard> implements IGame<Card> {
+export class Game<Card extends ICard = ICard, Round extends IRound = IRound<Card>>
+	implements IGame<Card, Round> {
 	protected readonly players: IPlayer<Card>[];
 	protected readonly deck: IDeck<Card>;
-	protected currentRound: IRound<Card> | null = null;
+	protected currentRound: Round | null = null;
 
 	constructor(options: GameOptions<Card>) {
 		const { players, deck } = options;
@@ -31,7 +32,7 @@ export class Game<Card extends ICard = ICard> implements IGame<Card> {
 
 	start(): void {}
 
-	getCurrentRound(): IRound<Card> | null {
+	getCurrentRound(): Round | null {
 		return this.currentRound;
 	}
 
