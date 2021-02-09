@@ -1,5 +1,5 @@
 import { IFoolGameCard, IFoolGamePlayer } from '../../game';
-import { Card } from './Card';
+import { Card, FacedownCard } from './Card';
 import s from './Hand.module.scss';
 import { useCallback, useContext } from 'react';
 import { FoolGameContext } from '../../context';
@@ -27,16 +27,20 @@ export function Hand(props: HandProps): JSX.Element {
 
 	return (
 		<div className={s.hand}>
-			{cards.map((card, index) => (
-				<Card
-					key={index}
-					isSelected={selectedCards.includes(card)}
-					facedown={player !== activePlayer}
-					className={s.card}
-					onClick={() => selectCard(card)}
-					card={card}
-				/>
-			))}
+			{cards.map((card, index) => {
+				if (activePlayer === player) {
+					return (
+						<Card
+							key={index}
+							isSelected={selectedCards.includes(card)}
+							className={s.card}
+							onClick={() => selectCard(card)}
+							card={card}
+						/>
+					);
+				}
+				return <FacedownCard key={index} className={s.card} />;
+			})}
 		</div>
 	);
 }

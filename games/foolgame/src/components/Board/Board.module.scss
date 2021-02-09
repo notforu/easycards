@@ -6,6 +6,7 @@ $white-color: #ffffff;
 
 .pokerContainer {
 	display: grid;
+	position: relative;
 	width: 800px;
 	height: 360px;
 
@@ -51,4 +52,10 @@ $white-color: #ffffff;
 			border-radius: 180px;
 		}
 	}
+}
+
+.deckContainer {
+	position: absolute;
+	bottom: 60%;
+	right: 10%;
 }

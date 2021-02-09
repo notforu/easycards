@@ -1,19 +1,18 @@
+.facedownCard,
 .card {
-	border: 1px solid black;
+	border: 1px solid #666;
 	border-radius: 10%;
 	height: 60px;
 	width: 42px;
+}
+
+.card {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	cursor: pointer;
-
-	.suit {
-		/*position: absolute;
-    left: 4px;
-    top: 4px;*/
-	}
+	background: white;
 
 	.rank {
 		font-size: 18px;
@@ -21,10 +20,6 @@
 
 	&.red {
 		color: red;
-	}
-
-	&.facedown {
-		background: repeating-linear-gradient(45deg, #606dbc, #606dbc 10px, #465298 10px, #465298 20px);
 	}
 
 	&:hover {
@@ -37,4 +32,9 @@
 		background: #88ff88;
 		border-width: 2px;
 	}
+}
+
+.facedownCard {
+	background: repeating-linear-gradient(45deg, #606dbc, #606dbc 10px, #465298 10px, #465298 20px);
+	cursor: default;
 }

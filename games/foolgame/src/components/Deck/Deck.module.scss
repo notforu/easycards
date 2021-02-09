@@ -1,0 +1,13 @@
+.deck {
+	position: relative;
+
+	.card {
+		position: absolute;
+	}
+
+	.powered {
+		position: absolute;
+		transform: rotate(-90deg);
+		right: 40px;
+	}
+}
