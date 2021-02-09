@@ -1,17 +1,21 @@
-import { IFoolGameCard } from '../../game/FoolGameCard';
+import { IFoolGamePlayer } from '../../game';
 import { Card } from './Card';
 import s from './Hand.module.scss';
+import { useContext } from 'react';
+import { FoolGameContext } from '../../context';
 
 export interface HandProps {
-	cards: IFoolGameCard[];
+	player: IFoolGamePlayer;
 }
 
 export function Hand(props: HandProps): JSX.Element {
-	const { cards } = props;
+	const { activePlayer } = useContext(FoolGameContext);
+	const { player } = props;
+	const cards = player.getCards();
 	return (
 		<div className={s.hand}>
 			{cards.map((card, index) => (
-				<Card key={index} className={s.card} card={card} />
+				<Card key={index} facedown={player !== activePlayer} className={s.card} card={card} />
 			))}
 		</div>
 	);

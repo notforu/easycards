@@ -1,20 +1,28 @@
 .card {
-	border: 2px solid black;
+	border: 1px solid black;
 	border-radius: 10%;
-	height: 80px;
-	width: 56px;
+	height: 60px;
+	width: 42px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	position: relative;
+	flex-direction: column;
 
 	.suit {
-		position: absolute;
-		left: 4px;
-		top: 4px;
+		/*position: absolute;
+    left: 4px;
+    top: 4px;*/
 	}
 
 	.rank {
-		font-size: 24px;
+		font-size: 18px;
+	}
+
+	&.red {
+		color: red;
+	}
+
+	&.facedown {
+		background: repeating-linear-gradient(45deg, #606dbc, #606dbc 10px, #465298 10px, #465298 20px);
 	}
 }
