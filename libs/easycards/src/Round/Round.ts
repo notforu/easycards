@@ -1,17 +1,20 @@
+import EventEmitter from 'eventemitter3';
 import { ICard } from '../Card';
 import { IPlayer } from '../Player';
 import { IDeck } from '../Deck';
 
-export interface IRound<Card extends ICard = ICard> {
+export interface IRound<Card extends ICard = ICard, Deck extends IDeck = IDeck>
+	extends EventEmitter<RoundEvents> {
 	start(): void;
 	getCurrentPlayer(): IPlayer<Card>;
+	setCurrentPlayer(player: IPlayer<Card>): void;
 	putCards(cards: Card[]): void;
 	getCards(): Card[];
 }
 
-export interface RoundOptions<Card extends ICard = ICard> {
+export interface RoundOptions<Card extends ICard, Deck extends IDeck> {
 	players: IPlayer<Card>[];
-	deck: IDeck<Card>;
+	deck: Deck;
 	firstPlayer?: IPlayer<Card>;
 }
 
@@ -21,13 +24,20 @@ export class NotAllowedActionError extends Error {
 	}
 }
 
-export class Round<Card extends ICard = ICard> implements IRound<Card> {
+export interface RoundEvents {
+	currentPlayerChanged: (player: IPlayer) => void;
+}
+
+export class Round<Card extends ICard, Deck extends IDeck>
+	extends EventEmitter<RoundEvents>
+	implements IRound<Card, Deck> {
 	protected readonly players: IPlayer<Card>[];
-	protected readonly deck: IDeck<Card>;
+	protected readonly deck: Deck;
 	protected readonly cards: Card[];
 	protected currentPlayer: IPlayer<Card>;
 
-	constructor(options: RoundOptions<Card>) {
+	constructor(options: RoundOptions<Card, Deck>) {
+		super();
 		const { players, deck } = options;
 		const { firstPlayer = options.players[0] } = options;
 		this.players = players;
@@ -39,6 +49,11 @@ export class Round<Card extends ICard = ICard> implements IRound<Card> {
 
 	getCurrentPlayer(): IPlayer<Card> {
 		return this.currentPlayer;
+	}
+
+	setCurrentPlayer(player: IPlayer<Card>): void {
+		this.currentPlayer = player;
+		this.emit('currentPlayerChanged', player);
 	}
 
 	putCards(cards: Card[]): void {
