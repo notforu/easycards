@@ -26,6 +26,7 @@ export class NotAllowedActionError extends Error {
 
 export interface RoundEvents {
 	currentPlayerChanged: (player: IPlayer) => void;
+	cardsChanged: (cards: ICard[]) => void;
 }
 
 export class Round<Card extends ICard, Deck extends IDeck>
@@ -58,6 +59,7 @@ export class Round<Card extends ICard, Deck extends IDeck>
 
 	putCards(cards: Card[]): void {
 		this.cards.push(...cards);
+		this.emit('cardsChanged', this.cards);
 	}
 
 	getCards(): Card[] {

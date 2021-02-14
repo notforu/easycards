@@ -29,6 +29,15 @@ describe('Round', () => {
 		expect(onCurrentPlayerChanged).toBeCalledWith(sam);
 	});
 
+	test('Should emit event about cards change', () => {
+		const onCardsChanged = jest.fn();
+		round.on('cardsChanged', onCardsChanged);
+		round.putCards([new Card()]);
+		expect(onCardsChanged).toBeCalledWith(round.getCards());
+		round.putCards([new Card()]);
+		expect(onCardsChanged).toBeCalledWith(round.getCards());
+	});
+
 	test('Should be able to put card and then get it', () => {
 		const jack = new Card({ rank: 'J' });
 		const nine = new Card({ rank: '9' });
