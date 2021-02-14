@@ -6,19 +6,19 @@ import { FoolGameContext } from './context';
 
 function App(): JSX.Element {
 	const { game } = useContext(FoolGameContext);
-	const [john, sam] = game.getPlayers();
+	const [player1, player2] = game.getPlayers();
 
 	return (
 		<div className={styles.game}>
 			<div className={styles.p2}>
-				<Hand player={sam} />
+				<Hand player={player2} />
 			</div>
 			<div className={styles.board}>
 				<Board />
 			</div>
 			<div className={styles.deck} />
 			<div className={styles.p1}>
-				<Hand player={john} />
+				<Hand player={player1} />
 			</div>
 		</div>
 	);
