@@ -9,9 +9,14 @@ export interface DeckOptions {
 	customCounts?: Record<string, number>;
 }
 
-export type IFoolGameDeck = IDeck<IFoolGameCard>;
+export interface IFoolGameDeck extends IDeck<IFoolGameCard> {
+	getPoweredCard(): IFoolGameCard | null;
+	getUnpoweredCards(): IFoolGameCard[];
+}
 
 export class FoolGameDeck extends Deck<IFoolGameCard> implements IDeck<IFoolGameCard> {
+	private poweredCard: IFoolGameCard | null = null;
+
 	constructor(options: DeckOptions = { ranks: DEFAULT_RANKS }) {
 		super();
 		const { ranks, customCounts } = options;
@@ -22,6 +27,18 @@ export class FoolGameDeck extends Deck<IFoolGameCard> implements IDeck<IFoolGame
 			}
 		}
 		this.cards = this.shuffle(this.cards);
+		const poweredCard = this.cards[0];
+		if (poweredCard !== undefined) {
+			this.poweredCard = poweredCard;
+		}
+	}
+
+	public getPoweredCard(): IFoolGameCard | null {
+		return this.poweredCard;
+	}
+
+	public getUnpoweredCards(): IFoolGameCard[] {
+		return this.cards.filter((card) => card !== this.poweredCard);
 	}
 
 	private shuffle(arr: IFoolGameCard[]): IFoolGameCard[] {

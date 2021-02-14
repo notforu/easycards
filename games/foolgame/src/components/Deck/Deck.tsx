@@ -10,15 +10,15 @@ export interface DeckProps {
 
 export function Deck(props: DeckProps): JSX.Element | null {
 	const { deck, className } = props;
-	const powered = deck.getCards().pop();
-	if (!powered) {
+	const poweredCard = deck.getPoweredCard();
+	if (poweredCard === null) {
 		return null;
 	}
 
 	return (
 		<div className={classnames(s.deck, className)}>
-			<Card card={powered} className={classnames(s.powered, s.card)} />
-			{deck.getCards().map((card, index) => (
+			<Card card={poweredCard} className={classnames(s.powered, s.card)} />
+			{deck.getUnpoweredCards().map((card, index) => (
 				<FacedownCard key={index} className={s.card} style={{ top: -index, right: -index }} />
 			))}
 		</div>

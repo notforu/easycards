@@ -9,5 +9,9 @@
 		position: absolute;
 		transform: rotate(90deg);
 		right: 40px;
+
+		&:hover {
+			background: #fff;
+		}
 	}
 }

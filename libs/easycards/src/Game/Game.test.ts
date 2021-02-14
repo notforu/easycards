@@ -1,9 +1,11 @@
 import { Game, IGame } from './Game';
 import { Deck, IDeck } from '../Deck';
 import { IPlayer, Player } from '../Player';
+import { ICard } from '../Card';
+import { IRound } from '../Round';
 
 const cardsPerHand = 6;
-let game: IGame;
+let game: IGame<ICard, IRound, IDeck>;
 let players: IPlayer[];
 let deck: IDeck;
 

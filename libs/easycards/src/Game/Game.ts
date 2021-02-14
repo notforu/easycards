@@ -3,25 +3,25 @@ import { IRound } from '../Round';
 import { IPlayer } from '../Player';
 import { IDeck } from '../Deck';
 
-export interface IGame<Card extends ICard = ICard, Round extends IRound = IRound<Card>> {
+export interface IGame<Card extends ICard, Round extends IRound, Deck extends IDeck> {
 	start(): void;
 	getCurrentRound(): Round | null;
 	getPlayers(): IPlayer<Card>[];
-	getDeck(): IDeck<Card>;
+	getDeck(): Deck;
 }
 
-export interface GameOptions<Card extends ICard = ICard> {
+export interface GameOptions<Card extends ICard, Deck extends IDeck> {
 	players: IPlayer<Card>[];
-	deck: IDeck<Card>;
+	deck: Deck;
 }
 
-export class Game<Card extends ICard = ICard, Round extends IRound = IRound<Card>>
-	implements IGame<Card, Round> {
+export class Game<Card extends ICard, Round extends IRound, Deck extends IDeck>
+	implements IGame<Card, Round, Deck> {
 	protected readonly players: IPlayer<Card>[];
-	protected readonly deck: IDeck<Card>;
+	protected readonly deck: Deck;
 	protected currentRound: Round | null = null;
 
-	constructor(options: GameOptions<Card>) {
+	constructor(options: GameOptions<Card, Deck>) {
 		const { players, deck } = options;
 		if (players.length < 2) {
 			throw new Error('Must be at least 2 players');
@@ -40,7 +40,7 @@ export class Game<Card extends ICard = ICard, Round extends IRound = IRound<Card
 		return this.players;
 	}
 
-	getDeck(): IDeck<Card> {
+	getDeck(): Deck {
 		return this.deck;
 	}
 }

@@ -4,6 +4,7 @@ import { IFoolGameCard, Suit } from '../FoolGameCard';
 const six = '6';
 const seven = '7';
 let deck: IFoolGameDeck;
+const DEFAULT_CARDS_COUNT = 36;
 
 function filterBySuit(cards: IFoolGameCard[], suit: Suit): IFoolGameCard[] {
 	return cards.filter((card) => card.getParams().suit === suit);
@@ -15,7 +16,7 @@ describe('FoolGameDeck', () => {
 	});
 
 	test('Default deck size should be 36', () => {
-		expect(deck.getCards().length).toBe(36);
+		expect(deck.getCards().length).toBe(DEFAULT_CARDS_COUNT);
 	});
 
 	test('Deck should contain 4 cards of every specified rank, if customCounts is not specified', () => {
@@ -40,5 +41,17 @@ describe('FoolGameDeck', () => {
 		expect(filterBySuit(customDeck.getCards(), Suit.Clubs)).toHaveLength(1);
 		expect(filterBySuit(customDeck.getCards(), Suit.Hearts)).toHaveLength(1);
 		expect(filterBySuit(customDeck.getCards(), Suit.Spades)).toHaveLength(1);
+	});
+
+	test('Should have powered card', () => {
+		expect(deck.getPoweredCard()).toBeDefined();
+	});
+
+	test('Should not include powered card', () => {
+		expect(deck.getUnpoweredCards()).not.toContain(deck.getPoweredCard());
+	});
+
+	test('Should have less size than all cards', () => {
+		expect(deck.getUnpoweredCards()).toHaveLength(DEFAULT_CARDS_COUNT - 1);
 	});
 });

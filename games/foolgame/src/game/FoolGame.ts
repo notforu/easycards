@@ -9,9 +9,11 @@ export interface GameOptions {
 	deck: IFoolGameDeck;
 }
 
-export type IFoolGame = IGame<IFoolGameCard, IFoolGameRound>;
+export type IFoolGame = IGame<IFoolGameCard, IFoolGameRound, IFoolGameDeck>;
 
-export class FoolGame extends Game<IFoolGameCard, IFoolGameRound> implements IFoolGame {
+export class FoolGame
+	extends Game<IFoolGameCard, IFoolGameRound, IFoolGameDeck>
+	implements IFoolGame {
 	constructor(options: GameOptions) {
 		super(options);
 		const { players } = options;
