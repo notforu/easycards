@@ -1,5 +1,6 @@
 import { IRound, Round, RoundOptions, IPlayer } from 'easycards';
 import { IFoolGameCard } from '../FoolGameCard';
+import { IFoolGameDeck } from '../FoolGameDeck';
 
 export interface IFoolGameRound extends IRound<IFoolGameCard> {
 	getUnbeatenCards(): IFoolGameCard[];
@@ -7,9 +8,9 @@ export interface IFoolGameRound extends IRound<IFoolGameCard> {
 	beat(player: IPlayer, target: IFoolGameCard, card: IFoolGameCard): void;
 }
 
-export type FoolGameRoundOptions = RoundOptions<IFoolGameCard>;
+export type FoolGameRoundOptions = RoundOptions<IFoolGameCard, IFoolGameDeck>;
 
-export class FoolGameRound extends Round<IFoolGameCard> implements IFoolGameRound {
+export class FoolGameRound extends Round<IFoolGameCard, IFoolGameDeck> implements IFoolGameRound {
 	private readonly beatMap: Map<IFoolGameCard, IFoolGameCard | null>;
 
 	constructor(options: FoolGameRoundOptions) {
